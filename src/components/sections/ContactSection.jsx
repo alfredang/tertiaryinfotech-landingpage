@@ -15,20 +15,47 @@ const ContactSection = () => {
     useFormValidation()
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validateAll()) return
 
     setSubmitting(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setSubmitting(false)
-    setSubmitted(true)
-    reset()
+    setError(null)
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitted(false), 5000)
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          company: values.company,
+          message: values.message,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setSubmitted(true)
+      reset()
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (err) {
+      console.error('Error sending message:', err)
+      setError(err.message || 'Failed to send message. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -160,6 +187,13 @@ const ContactSection = () => {
                         </p>
                       )}
                     </div>
+
+                    {/* Error Message */}
+                    {error && (
+                      <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                        <p className="text-sm text-red-400">{error}</p>
+                      </div>
+                    )}
 
                     {/* Submit */}
                     <GlowButton
