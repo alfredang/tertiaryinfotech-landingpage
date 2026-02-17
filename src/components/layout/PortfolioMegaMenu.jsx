@@ -30,7 +30,7 @@ const PortfolioMegaMenu = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed left-1/2 -translate-x-1/2 mt-5 w-[95vw] max-w-[1200px] z-50"
+            className="fixed top-16 md:top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1200px] z-50"
           >
             <div className="bg-dark-primary/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
               style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
