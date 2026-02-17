@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import nodemailer from 'nodemailer'
+import pkg from 'nodemailer'
+const { createTransport } = pkg
 import { google } from 'googleapis'
 import dotenv from 'dotenv'
 
@@ -35,7 +36,7 @@ const createTransporter = async () => {
     })
   })
 
-  const transporter = nodemailer.createTransporter({
+  const transporter = createTransport({
     service: 'gmail',
     auth: {
       type: 'OAuth2',

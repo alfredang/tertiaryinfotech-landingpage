@@ -2,12 +2,15 @@ import { google } from 'googleapis'
 import http from 'http'
 import { parse } from 'url'
 import open from 'open'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const OAuth2 = google.auth.OAuth2
 
 const oauth2Client = new OAuth2(
-  'REDACTED_CLIENT_ID',
-  'REDACTED_CLIENT_SECRET',
+  process.env.GMAIL_CLIENT_ID,
+  process.env.GMAIL_CLIENT_SECRET,
   'http://localhost:3000/oauth2callback'
 )
 
@@ -21,7 +24,7 @@ const authorizeUrl = oauth2Client.generateAuthUrl({
 console.log('\n🚀 Starting OAuth2 Token Generator...\n')
 console.log('📝 Instructions:')
 console.log('1. A browser window will open automatically')
-console.log('2. Sign in with: sales@tertiarycourses.com.sg')
+console.log(`2. Sign in with: ${process.env.GMAIL_USER}`)
 console.log('3. Grant the requested permissions')
 console.log('4. You will be redirected back automatically')
 console.log('5. Your refresh token will be displayed here\n')
