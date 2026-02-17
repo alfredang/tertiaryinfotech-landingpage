@@ -176,7 +176,8 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-white/5 text-center">
           <p className="text-sm text-gray-500">
-            &copy; {currentYear} Tertiary Infotech. All rights reserved.
+            &copy; 2026 Tertiary Infotech Academy Pte Ltd. UEN: 201200606W. All
+            rights reserved.
           </p>
         </div>
       </Container>
