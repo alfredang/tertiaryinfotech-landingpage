@@ -3,12 +3,16 @@ import cors from 'cors'
 import pkg from 'nodemailer'
 const { createTransport } = pkg
 import { google } from 'googleapis'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const app = express()
 const OAuth2 = google.auth.OAuth2
+
+// Initialize Gemini AI
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
 // Middleware
 app.use(cors())
@@ -166,6 +170,76 @@ Reply to: ${email}
     console.error('Error sending email:', error)
     res.status(500).json({
       error: 'Failed to send email',
+      details: error.message,
+    })
+  }
+})
+
+// Chatbot endpoint
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { message, history = [] } = req.body
+
+    if (!message) {
+      return res.status(400).json({ error: 'Message is required' })
+    }
+
+    // Create model with system instructions about the website
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-pro',
+      systemInstruction: `You are a helpful assistant for Tertiary Infotech Academy, a leading provider of professional training and IT solutions in Singapore.
+
+About Tertiary Infotech Academy:
+- Located at: 12 Woodlands Square, #07-85/86/87, Woods Square Tower 1, Singapore 737715
+- UEN: 201200606W
+- Contact: sales@tertiarycourses.com.sg
+- Website: https://tertiaryinfo.tech
+
+Our Services:
+1. Professional IT Training
+2. Corporate Training Solutions
+3. Custom Software Development
+4. Web and Mobile App Development
+5. IT Consulting Services
+
+Our Portfolio includes:
+- TertiaryInfo (https://www.tertiaryinfo.com) - Comprehensive IT training platform
+- TertiaryCourses (https://www.tertiarycourses.com) - Course catalog and booking system
+- TertiaryFX (https://www.tertiaryfx.com) - Foreign exchange trading platform
+- MelodyMinds (https://www.melodyminds.com) - Music education platform
+- Various corporate training projects and custom solutions
+
+Your role is to:
+- Answer questions about our services, training programs, and portfolio
+- Help visitors understand what we offer
+- Provide information about course availability and corporate training
+- Direct users to contact us for specific inquiries or bookings
+- Be professional, friendly, and helpful
+- If you don't know something specific, encourage them to contact us directly
+
+Always maintain a professional yet approachable tone.`,
+    })
+
+    // Start chat with history
+    const chat = model.startChat({
+      history: history.map((msg) => ({
+        role: msg.role,
+        parts: [{ text: msg.content }],
+      })),
+    })
+
+    // Send message and get response
+    const result = await chat.sendMessage(message)
+    const response = result.response.text()
+
+    res.json({
+      response,
+      success: true,
+    })
+  } catch (error) {
+    console.error('Chatbot error:', error)
+    res.status(500).json({
+      error: 'Failed to get response from chatbot',
       details: error.message,
     })
   }

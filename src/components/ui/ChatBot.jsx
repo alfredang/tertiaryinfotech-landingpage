@@ -2,14 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiXMark, HiPaperAirplane } from 'react-icons/hi2'
 
-const BOT_RESPONSES = [
-  "Thanks for reaching out! I'd be happy to help you learn more about our solutions.",
-  "We offer enterprise-grade TMS, LMS, and AI-powered platforms. Which area interests you most?",
-  "Our team typically responds within a few hours. In the meantime, feel free to explore our services section!",
-  "Great question! I'll make sure our team follows up with detailed information.",
-  "You can also fill out our contact form below for a personalized consultation.",
-]
-
 const INITIAL_MESSAGES = [
   {
     id: 'welcome',
@@ -38,7 +30,7 @@ const ChatBot = () => {
     if (open) inputRef.current?.focus()
   }, [open])
 
-  const sendMessage = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault()
     const text = input.trim()
     if (!text) return
@@ -48,16 +40,43 @@ const ChatBot = () => {
     setInput('')
     setTyping(true)
 
-    // Simulate bot response
-    setTimeout(() => {
-      const response =
-        BOT_RESPONSES[Math.floor(Math.random() * BOT_RESPONSES.length)]
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+      const response = await fetch(`${apiUrl}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: messages
+            .filter((msg) => msg.id !== 'welcome')
+            .map((msg) => ({
+              role: msg.from === 'user' ? 'user' : 'assistant',
+              content: msg.text,
+            })),
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) throw new Error(data.error || 'Failed to get response')
+
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, from: 'bot', text: response },
+        { id: Date.now() + 1, from: 'bot', text: data.response },
       ])
+    } catch (error) {
+      console.error('Chat error:', error)
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          from: 'bot',
+          text: 'Sorry, I encountered an error. Please try again or contact us directly at sales@tertiarycourses.com.sg',
+        },
+      ])
+    } finally {
       setTyping(false)
-    }, 1200 + Math.random() * 800)
+    }
   }
 
   return (
@@ -71,22 +90,41 @@ const ChatBot = () => {
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="absolute bottom-20 right-0 w-[360px] max-w-[calc(100vw-3rem)] rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl"
-            style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.08)' }}
+            style={{
+              boxShadow:
+                '0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.08)',
+            }}
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 backdrop-blur-xl border-b border-white/[0.08] px-5 py-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-neon-blue to-neon-cyan flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M10 21v1a2 2 0 0 0 4 0v-1" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      className="w-5 h-5 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M10 21v1a2 2 0 0 0 4 0v-1"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
                   <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-dark-deeper" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white leading-none">AI Assistant</h4>
+                  <h4 className="text-sm font-semibold text-white leading-none">
+                    AI Assistant
+                  </h4>
                   <p className="text-xs text-emerald-400 mt-0.5">Online</p>
                 </div>
               </div>
@@ -129,9 +167,18 @@ const ChatBot = () => {
                   className="flex justify-start"
                 >
                   <div className="bg-white/[0.06] border border-white/[0.08] rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span
+                      className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                      style={{ animationDelay: '0ms' }}
+                    />
+                    <span
+                      className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                      style={{ animationDelay: '150ms' }}
+                    />
+                    <span
+                      className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                      style={{ animationDelay: '300ms' }}
+                    />
                   </div>
                 </motion.div>
               )}
@@ -150,11 +197,12 @@ const ChatBot = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type a message..."
-                className="flex-1 bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-neon-blue/40 focus:outline-none transition-colors"
+                disabled={typing}
+                className="flex-1 bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-neon-blue/40 focus:outline-none transition-colors disabled:opacity-50"
               />
               <button
                 type="submit"
-                disabled={!input.trim()}
+                disabled={!input.trim() || typing}
                 className="w-10 h-10 rounded-xl bg-gradient-to-r from-neon-blue to-neon-cyan flex items-center justify-center text-white disabled:opacity-30 hover:shadow-glow-blue transition-all duration-200 cursor-pointer disabled:cursor-not-allowed flex-shrink-0"
               >
                 <HiPaperAirplane className="w-4 h-4" />
@@ -196,7 +244,15 @@ const ChatBot = () => {
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
-              <svg className="w-6 h-6 relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                className="w-6 h-6 relative z-10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
               </svg>
             </motion.span>
