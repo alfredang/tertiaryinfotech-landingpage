@@ -182,12 +182,9 @@ const ProjectPage = () => {
                   showcasing our expertise in building modern, scalable applications.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <Link to="/#contact">
+                  <a href="#get-started">
                     <GlowButton className="text-sm px-6 py-2.5">Request Demo</GlowButton>
-                  </Link>
-                  <Link to="/#services">
-                    <GlowButton variant="outline" className="text-sm px-6 py-2.5">Our Services</GlowButton>
-                  </Link>
+                  </a>
                 </div>
               </div>
 
@@ -231,7 +228,7 @@ const ProjectPage = () => {
           )}
 
           {/* Let's Get Started - Contact Form */}
-          <motion.div variants={fadeUp()} className="mb-12">
+          <motion.div variants={fadeUp()} className="mb-12" id="get-started">
             <h2 className="text-2xl font-bold text-white mb-2 text-center">Let's Get Started</h2>
             <p className="text-gray-400 mb-8 text-center max-w-2xl mx-auto">
               Interested in {project.name}? Get in touch and let's discuss how we can help transform your organization.

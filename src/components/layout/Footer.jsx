@@ -36,22 +36,21 @@ const Footer = () => {
       <div className="h-px bg-gradient-to-r from-transparent via-neon-blue/50 to-transparent" />
 
       <Container className="py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-1">
           {/* Column 1: Brand */}
-          <div>
+          <div className="lg:col-span-3">
             <RouterLink to="/">
               <span className="text-xl font-bold text-white">
                 Tertiary<span className="gradient-text">Infotech</span>
               </span>
             </RouterLink>
             <p className="mt-4 text-sm text-gray-400 leading-relaxed">
-              Powering the future of training and AI solutions. Enterprise-grade
-              platforms built for organizations that demand excellence.
+              A leading provider of professional IT training and custom software development in Singapore. We specialize in Training Management Systems (TMS), Learning Management Systems (LMS), AI-powered solutions, and enterprise applications. With over two decades of experience, we empower organizations to transform their operations through cutting-edge technology and innovation.
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Quick Links
             </h4>
@@ -70,7 +69,7 @@ const Footer = () => {
           </div>
 
           {/* Column 3: Affiliated Websites */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Affiliated Websites
             </h4>
@@ -91,7 +90,7 @@ const Footer = () => {
           </div>
 
           {/* Column 4: Services */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Services
             </h4>
@@ -110,7 +109,7 @@ const Footer = () => {
           </div>
 
           {/* Column 5: Connect */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Connect With Us
             </h4>
