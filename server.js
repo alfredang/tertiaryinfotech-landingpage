@@ -186,7 +186,7 @@ app.post('/api/chat', async (req, res) => {
 
     // Create model with system instructions about the website
     const model = genAI.getGenerativeModel({
-      model: 'gemini-pro',
+      model: 'gemini-2.5-flash',
       systemInstruction: `You are a helpful assistant for Tertiary Infotech Academy, a leading provider of professional training and IT solutions in Singapore.
 
 About Tertiary Infotech Academy:
