@@ -4,9 +4,9 @@ This guide will help you set up Gmail OAuth2 for the contact form.
 
 ## What You Have
 
-✅ Client ID: `REDACTED_CLIENT_ID`
-✅ Client Secret: `REDACTED_CLIENT_SECRET`
-✅ Gmail Account: `sales@tertiarycourses.com.sg`
+✅ Client ID: (from Google Cloud Console → Credentials → OAuth 2.0 Client IDs)
+✅ Client Secret: (from Google Cloud Console → Credentials → OAuth 2.0 Client IDs)
+✅ Gmail Account: (your Gmail address)
 
 ## What You Need
 
@@ -22,8 +22,8 @@ This guide will help you set up Gmail OAuth2 for the contact form.
 2. **Configure OAuth2 Settings**
    - Click the gear icon (⚙️) in the top right
    - Check "Use your own OAuth credentials"
-   - Enter your Client ID: `REDACTED_CLIENT_ID`
-   - Enter your Client Secret: `REDACTED_CLIENT_SECRET`
+   - Enter your Client ID (from `.env` file)
+   - Enter your Client Secret (from `.env` file)
    - Click "Close"
 
 3. **Select Scopes**

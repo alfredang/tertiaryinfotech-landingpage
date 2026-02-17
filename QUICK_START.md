@@ -9,10 +9,10 @@ Visit the OAuth2 Playground: https://developers.google.com/oauthplayground
 Follow these steps:
 1. Click ⚙️ (Settings) → "Use your own OAuth credentials"
 2. Enter:
-   - Client ID: `REDACTED_CLIENT_ID`
-   - Client Secret: `REDACTED_CLIENT_SECRET`
+   - Client ID: `your_client_id` (from Google Cloud Console)
+   - Client Secret: `your_client_secret` (from Google Cloud Console)
 3. Select scope: `https://mail.google.com/`
-4. Click "Authorize APIs" and sign in as `sales@tertiarycourses.com.sg`
+4. Click "Authorize APIs" and sign in with the Gmail account
 5. Click "Exchange authorization code for tokens"
 6. Copy the **Refresh Token**
 
@@ -54,10 +54,10 @@ npm run server
 Your `.env` file should look like this:
 ```env
 # Gmail OAuth2 Configuration
-GMAIL_USER=sales@tertiarycourses.com.sg
-GMAIL_CLIENT_ID=REDACTED_CLIENT_ID
-GMAIL_CLIENT_SECRET=REDACTED_CLIENT_SECRET
-GMAIL_REFRESH_TOKEN=your_refresh_token_here
+GMAIL_USER=your_gmail_address
+GMAIL_CLIENT_ID=your_client_id
+GMAIL_CLIENT_SECRET=your_client_secret
+GMAIL_REFRESH_TOKEN=your_refresh_token
 
 # Server Port
 PORT=3001
@@ -70,10 +70,10 @@ VITE_API_URL=http://localhost:3001
 
 1. Set these environment variables in Coolify:
    ```
-   GMAIL_USER=sales@tertiarycourses.com.sg
-   GMAIL_CLIENT_ID=REDACTED_CLIENT_ID
-   GMAIL_CLIENT_SECRET=REDACTED_CLIENT_SECRET
-   GMAIL_REFRESH_TOKEN=your_refresh_token_here
+   GMAIL_USER=your_gmail_address
+   GMAIL_CLIENT_ID=your_client_id
+   GMAIL_CLIENT_SECRET=your_client_secret
+   GMAIL_REFRESH_TOKEN=your_refresh_token
    PORT=3001
    VITE_API_URL=https://your-production-api-url.com
    ```
