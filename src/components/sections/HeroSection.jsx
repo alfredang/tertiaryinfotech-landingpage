@@ -8,7 +8,7 @@ import { staggerContainer, fadeUp } from '../../utils/animations'
 const HeroSection = () => (
   <section
     id="home"
-    className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    className="relative min-h-[75vh] flex items-center justify-center overflow-hidden"
   >
     <AnimatedBackground />
 
