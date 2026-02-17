@@ -1,38 +1,39 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiChevronDown, HiStar } from 'react-icons/hi2'
 import { PORTFOLIO_CATEGORIES } from '../../utils/portfolio'
 
-const PortfolioMegaMenu = () => {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button
-        className="flex items-center gap-1 text-sm text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer"
-        onClick={() => setOpen((v) => !v)}
-      >
-        Portfolio
-        <HiChevronDown
-          className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-      <AnimatePresence>
-        {open && (
+const MegaMenuDropdown = ({ open, onClose }) => {
+  return createPortal(
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Invisible bridge from navbar to dropdown */}
+          <div
+            className="fixed top-16 md:top-20 left-0 w-full h-4 z-[99]"
+            onMouseEnter={() => {}}
+            onMouseLeave={onClose}
+          />
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-16 md:top-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-[1200px] z-50"
+            className="fixed z-[100]"
+            style={{
+              top: 'calc(5rem + 4px)',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '95vw',
+              maxWidth: '1200px',
+            }}
+            onMouseEnter={() => {}}
+            onMouseLeave={onClose}
           >
-            <div className="bg-dark-primary/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
+            <div
+              className="bg-dark-primary/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
               style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
             >
               {/* Header */}
@@ -42,7 +43,7 @@ const PortfolioMegaMenu = () => {
                 </p>
                 <Link
                   to="/portfolio"
-                  onClick={() => setOpen(false)}
+                  onClick={onClose}
                   className="text-xs font-medium text-neon-blue hover:text-neon-cyan transition-colors cursor-pointer"
                 >
                   View all projects &rarr;
@@ -73,7 +74,7 @@ const PortfolioMegaMenu = () => {
                               <li key={item.slug}>
                                 <Link
                                   to={`/portfolio/${item.slug}`}
-                                  onClick={() => setOpen(false)}
+                                  onClick={onClose}
                                   className="group/link flex items-center gap-1.5 py-1 px-1.5 -mx-1.5 rounded-lg text-xs text-gray-400 hover:text-white hover:bg-white/[0.04] transition-all duration-150 cursor-pointer"
                                 >
                                   <span className="truncate">{item.name}</span>
@@ -92,8 +93,32 @@ const PortfolioMegaMenu = () => {
               </div>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </>
+      )}
+    </AnimatePresence>,
+    document.body
+  )
+}
+
+const PortfolioMegaMenu = () => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        className="flex items-center gap-1 text-sm text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer"
+        onClick={() => setOpen((v) => !v)}
+      >
+        Portfolio
+        <HiChevronDown
+          className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      <MegaMenuDropdown open={open} onClose={() => setOpen(false)} />
     </div>
   )
 }
