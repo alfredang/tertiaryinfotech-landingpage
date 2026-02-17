@@ -36,7 +36,7 @@ const Footer = () => {
       <div className="h-px bg-gradient-to-r from-transparent via-neon-blue/50 to-transparent" />
 
       <Container className="py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-6">
           {/* Column 1: Brand */}
           <div>
             <RouterLink to="/">
@@ -110,7 +110,7 @@ const Footer = () => {
           </div>
 
           {/* Column 5: Connect */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Connect With Us
             </h4>
