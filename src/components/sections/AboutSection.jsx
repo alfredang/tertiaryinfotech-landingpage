@@ -10,7 +10,7 @@ const stats = [
 ]
 
 const AboutSection = () => (
-  <section id="about" className="py-24 relative">
+  <section id="about" className="py-16 relative">
     <Container>
       <SectionHeading
         label="About Us"

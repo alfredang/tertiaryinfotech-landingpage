@@ -6,7 +6,7 @@ import { SERVICES } from '../../utils/constants'
 import { staggerContainer, fadeUp } from '../../utils/animations'
 
 const ServicesSection = () => (
-  <section id="services" className="py-24 relative">
+  <section id="services" className="py-16 relative">
     <Container>
       <SectionHeading
         label="Our Services"
