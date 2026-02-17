@@ -17,6 +17,12 @@ const services = [
   { label: 'AI-Powered Solutions', to: '/#services' },
 ]
 
+const affiliatedWebsites = [
+  { label: 'Tertiary Infotech', url: 'https://www.tertiaryinfotech.com' },
+  { label: 'Tertiary Courses', url: 'https://www.tertiarycourses.com.sg' },
+  { label: 'Tertiary Robotics', url: 'https://www.tertiaryrobotics.com' },
+]
+
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
@@ -25,7 +31,7 @@ const Footer = () => {
       <div className="h-px bg-gradient-to-r from-transparent via-neon-blue/50 to-transparent" />
 
       <Container className="py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Column 1: Brand */}
           <div>
             <RouterLink to="/">
@@ -58,7 +64,28 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Services */}
+          {/* Column 3: Affiliated Websites */}
+          <div>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+              Affiliated Websites
+            </h4>
+            <ul className="space-y-3">
+              {affiliatedWebsites.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-gray-400 hover:text-neon-cyan transition-colors duration-200"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Services */}
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Services
@@ -77,7 +104,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 4: Connect */}
+          {/* Column 5: Connect */}
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
               Connect With Us

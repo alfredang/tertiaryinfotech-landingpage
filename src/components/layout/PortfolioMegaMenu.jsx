@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -6,30 +6,46 @@ import { HiChevronDown, HiStar } from 'react-icons/hi2'
 import { PORTFOLIO_CATEGORIES } from '../../utils/portfolio'
 
 const MegaMenuDropdown = ({ open, onClose }) => {
+  // Close on click outside
+  useEffect(() => {
+    if (!open) return
+
+    const handleClickOutside = (e) => {
+      // Close if clicking outside the mega menu
+      if (!e.target.closest('[data-mega-menu]')) {
+        onClose()
+      }
+    }
+
+    // Add listener after a small delay to prevent immediate closing
+    const timer = setTimeout(() => {
+      document.addEventListener('click', handleClickOutside)
+    }, 100)
+
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [open, onClose])
+
   return createPortal(
     <AnimatePresence>
       {open && (
         <>
-          {/* Invisible bridge from navbar to dropdown */}
           <div
-            className="fixed top-16 md:top-20 left-0 w-full h-4 z-[99]"
-            onMouseEnter={() => {}}
-            onMouseLeave={onClose}
-          />
-          <div
-            className="fixed top-20 left-0 w-full z-[100] flex justify-center px-4"
-            onMouseEnter={() => {}}
-            onMouseLeave={onClose}
+            className="fixed top-[72px] md:top-[88px] left-0 w-full z-[100] flex justify-center px-4 pointer-events-none"
+            data-mega-menu
           >
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full max-w-[1200px]"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[1200px] pointer-events-auto"
+            style={{ willChange: 'transform, opacity' }}
           >
             <div
-              className="bg-dark-primary/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
+              className="bg-dark-primary border border-white/[0.08] rounded-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-120px)]"
               style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
             >
               {/* Header */}
@@ -101,17 +117,15 @@ const PortfolioMegaMenu = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <div
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
+    <div className="relative" data-mega-menu>
       <button
-        className="flex items-center gap-1 text-sm text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer"
+        className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer group"
         onClick={() => setOpen((v) => !v)}
       >
-        Portfolio
+        <span>Portfolio</span>
         <HiChevronDown
-          className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          style={{ willChange: 'transform' }}
         />
       </button>
 

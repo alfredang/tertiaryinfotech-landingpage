@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   HiArrowLeft,
   HiStar,
@@ -8,19 +9,41 @@ import {
   HiGlobeAlt,
   HiCodeBracket,
   HiCpuChip,
-  HiEnvelope,
-  HiPhone,
-  HiChatBubbleLeftRight,
 } from 'react-icons/hi2'
-import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa6'
+import { FaGithub } from 'react-icons/fa6'
 import Container from '../components/layout/Container'
 import GlowButton from '../components/ui/GlowButton'
+import SEO from '../components/seo/SEO'
 import { ALL_PROJECTS } from '../utils/portfolio'
 import { fadeUp, staggerContainer } from '../utils/animations'
+import { useFormValidation } from '../hooks/useFormValidation'
+
+const inputClasses =
+  'w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-neon-blue/50 focus:ring-1 focus:ring-neon-blue/25 focus:outline-none transition-all duration-300'
 
 const ProjectPage = () => {
   const { slug } = useParams()
   const project = ALL_PROJECTS.find((p) => p.slug === slug)
+
+  const { values, errors, touched, handleChange, handleBlur, validateAll, reset } =
+    useFormValidation()
+  const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!validateAll()) return
+
+    setSubmitting(true)
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    setSubmitting(false)
+    setSubmitted(true)
+    reset()
+
+    // Reset success message after 5 seconds
+    setTimeout(() => setSubmitted(false), 5000)
+  }
 
   if (!project) {
     return (
@@ -49,6 +72,19 @@ const ProjectPage = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title={`${project.name} - ${project.subcategory}`}
+        description={`${project.description} ${
+          project.features && project.features.length > 0
+            ? 'Key features: ' + project.features.slice(0, 3).join(', ') + '.'
+            : ''
+        }`}
+        keywords={`${project.name.toLowerCase()}, ${project.category.toLowerCase()}, ${project.subcategory.toLowerCase()}, ${
+          project.techStack.join(', ')
+        }, tertiary infotech, singapore software development`}
+        url={`https://www.tertiaryinfotech.com/portfolio/${project.slug}`}
+        type="article"
+      />
       <Container>
         <motion.div
           variants={staggerContainer(0.12, 0.05)}
@@ -176,98 +212,187 @@ const ProjectPage = () => {
             </div>
           </motion.div>
 
-          {/* Connect section */}
-          <motion.div variants={fadeUp()} className="glass-card p-6 sm:p-8 mb-12">
-            <h2 className="text-xl font-semibold text-white mb-6">Connect With Us</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Social & Links */}
-              <div className="space-y-4">
-                <a
-                  href="https://www.linkedin.com/in/angchewhoe/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-neon-cyan/10 group-hover:border-neon-cyan/20 transition-all">
-                    <FaLinkedin className="w-5 h-5" />
+          {/* Features section */}
+          {project.features && project.features.length > 0 && (
+            <motion.div variants={fadeUp()} className="glass-card p-6 sm:p-8 md:p-12 mb-12">
+              <h2 className="text-xl font-semibold text-white mb-6">Key Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {project.features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-200"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-neon-cyan mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-300 leading-relaxed">{feature}</p>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">LinkedIn</p>
-                    <p className="text-xs text-gray-500">linkedin.com/in/angchewhoe</p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://github.com/alfredang"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-neon-cyan/10 group-hover:border-neon-cyan/20 transition-all">
-                    <FaGithub className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">GitHub</p>
-                    <p className="text-xs text-gray-500">github.com/alfredang</p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://wa.me/6586688544"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-neon-cyan/10 group-hover:border-neon-cyan/20 transition-all">
-                    <FaWhatsapp className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">WhatsApp</p>
-                    <p className="text-xs text-gray-500">+65 8668 8544</p>
-                  </div>
-                </a>
+                ))}
               </div>
+            </motion.div>
+          )}
 
-              {/* Contact Info */}
-              <div className="space-y-4">
-                <a
-                  href="mailto:enquiry@tertiaryinfotech.com"
-                  className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-neon-cyan/10 group-hover:border-neon-cyan/20 transition-all">
-                    <HiEnvelope className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">Email</p>
-                    <p className="text-xs text-gray-500">enquiry@tertiaryinfotech.com</p>
-                  </div>
-                </a>
+          {/* Let's Get Started - Contact Form */}
+          <motion.div variants={fadeUp()} className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-2 text-center">Let's Get Started</h2>
+            <p className="text-gray-400 mb-8 text-center max-w-2xl mx-auto">
+              Interested in {project.name}? Get in touch and let's discuss how we can help transform your organization.
+            </p>
 
-                <a
-                  href="tel:+6561000613"
-                  className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-neon-cyan/10 group-hover:border-neon-cyan/20 transition-all">
-                    <HiPhone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">Telephone</p>
-                    <p className="text-xs text-gray-500">+65 6100 0613</p>
-                  </div>
-                </a>
+            <div className="max-w-2xl mx-auto">
+              <div className="glass-card p-8 md:p-10">
 
-                <Link
-                  to="/#contact"
-                  className="flex items-center gap-3 text-gray-400 hover:text-neon-cyan transition-colors group"
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="text-center py-12"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center group-hover:bg-neon-cyan/10 group-hover:border-neon-cyan/20 transition-all">
-                    <HiChatBubbleLeftRight className="w-5 h-5" />
+                  <div className="w-16 h-16 rounded-full bg-neon-cyan/10 flex items-center justify-center mx-auto mb-4">
+                    <svg
+                      className="w-8 h-8 text-neon-cyan"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
                   </div>
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    Message Sent!
+                  </h3>
+                  <p className="text-gray-400">
+                    Thank you for reaching out. We'll get back to you shortly.
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                >
+                  {/* Name & Email row */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Name <span className="text-neon-pink">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="Your name"
+                        className={inputClasses}
+                      />
+                      {touched.name && errors.name && (
+                        <p className="mt-1.5 text-sm text-neon-pink">{errors.name}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Email <span className="text-neon-pink">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="you@company.com"
+                        className={inputClasses}
+                      />
+                      {touched.email && errors.email && (
+                        <p className="mt-1.5 text-sm text-neon-pink">
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Company */}
                   <div>
-                    <p className="text-sm font-medium text-white">Contact Form</p>
-                    <p className="text-xs text-gray-500">Send us a message</p>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={values.company}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Your company name"
+                      className={inputClasses}
+                    />
                   </div>
-                </Link>
+
+                  {/* Message */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Message <span className="text-neon-pink">*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      value={values.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Tell us about your project..."
+                      rows={4}
+                      className={`${inputClasses} resize-none`}
+                    />
+                    {touched.message && errors.message && (
+                      <p className="mt-1.5 text-sm text-neon-pink">
+                        {errors.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Submit */}
+                  <GlowButton
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full"
+                  >
+                    {submitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg
+                          className="animate-spin w-5 h-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                          />
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </GlowButton>
+                </motion.form>
+              )}
+            </AnimatePresence>
               </div>
             </div>
           </motion.div>

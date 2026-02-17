@@ -19,14 +19,6 @@ const HeroSection = () => (
         animate="visible"
         className="flex flex-col items-center"
       >
-        {/* Badge */}
-        <motion.span
-          variants={fadeUp()}
-          className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-neon-blue/10 text-neon-blue border border-neon-blue/20 mb-8"
-        >
-          AI-Powered Enterprise Solutions
-        </motion.span>
-
         {/* Headline */}
         <motion.h1
           variants={fadeUp()}

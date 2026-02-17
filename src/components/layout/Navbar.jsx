@@ -12,8 +12,8 @@ import GlowButton from '../ui/GlowButton'
 const NAV_SCROLL_LINKS = [
   { label: 'Home', to: 'home' },
   { label: 'About', to: 'about' },
+  { label: 'Services', to: 'services' },
   { label: 'Why Us', to: 'why-us' },
-  { label: 'Contact', to: 'contact' },
 ]
 
 const NavScrollLink = ({ to, label }) => {
@@ -49,6 +49,8 @@ const NavScrollLink = ({ to, label }) => {
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const scrolled = useScrollPosition(50)
+  const location = useLocation()
+  const isHome = location.pathname === '/'
 
   return (
     <>
@@ -74,16 +76,22 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             <NavScrollLink to="home" label="Home" />
             <NavScrollLink to="about" label="About" />
+            <NavScrollLink to="services" label="Services" />
             <PortfolioMegaMenu />
             <NavScrollLink to="why-us" label="Why Us" />
-            <NavScrollLink to="contact" label="Contact" />
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <RouterLink to="/#contact">
-              <GlowButton className="text-sm px-6 py-2.5">Get Started</GlowButton>
-            </RouterLink>
+            {isHome ? (
+              <ScrollLink to="contact" smooth offset={-80} duration={600}>
+                <GlowButton className="text-sm px-6 py-2.5">Get Started</GlowButton>
+              </ScrollLink>
+            ) : (
+              <RouterLink to="/#contact">
+                <GlowButton className="text-sm px-6 py-2.5">Get Started</GlowButton>
+              </RouterLink>
+            )}
           </div>
 
           {/* Mobile hamburger */}

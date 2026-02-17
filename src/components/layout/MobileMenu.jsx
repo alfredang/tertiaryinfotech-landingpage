@@ -10,8 +10,8 @@ const MOBILE_NAV = [
 ]
 
 const MOBILE_NAV_AFTER = [
+  { label: 'Services', to: 'services' },
   { label: 'Why Us', to: 'why-us' },
-  { label: 'Contact', to: 'contact' },
 ]
 
 const MobileNavLink = ({ to, label, onClose }) => {

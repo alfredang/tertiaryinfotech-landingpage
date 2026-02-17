@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { HiStar, HiMagnifyingGlass } from 'react-icons/hi2'
 import Container from '../components/layout/Container'
 import ScrollReveal from '../components/ui/ScrollReveal'
+import SEO from '../components/seo/SEO'
 import { PORTFOLIO_CATEGORIES } from '../utils/portfolio'
 import { staggerContainer, fadeUp } from '../utils/animations'
 
@@ -18,6 +19,12 @@ const PortfolioPage = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title="Portfolio - AI Solutions & Software Projects"
+        description="Explore our complete portfolio of AI-powered solutions, learning management systems, HR platforms, enterprise tools, property management, and innovative web applications. Over 50+ projects showcasing modern technology and expert craftsmanship."
+        keywords="portfolio, AI solutions, learning management system, HR management software, property management, enterprise applications, web development projects, react projects, next.js applications, AI chatbot, singapore software portfolio"
+        url="https://www.tertiaryinfotech.com/portfolio"
+      />
       <Container>
         {/* Header */}
         <ScrollReveal>

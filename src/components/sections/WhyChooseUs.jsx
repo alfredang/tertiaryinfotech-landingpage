@@ -4,7 +4,7 @@ import FeatureItem from '../ui/FeatureItem'
 import { WHY_CHOOSE_US } from '../../utils/constants'
 
 const WhyChooseUs = () => (
-  <section id="why-us" className="py-16 relative">
+  <section id="why-us" className="py-6 relative">
     <Container>
       <SectionHeading
         label="Why Choose Us"

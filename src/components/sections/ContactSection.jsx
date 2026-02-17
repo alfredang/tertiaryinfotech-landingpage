@@ -32,7 +32,7 @@ const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="py-16 relative">
+    <section id="contact" className="py-6 relative">
       <Container>
         <SectionHeading
           label="Contact Us"
