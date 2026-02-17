@@ -88,11 +88,11 @@ const Navbar = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-white p-2 cursor-pointer"
+            className="md:hidden text-white p-3 -mr-2 active:scale-90 transition-transform cursor-pointer"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
-            <HiBars3 className="w-6 h-6" />
+            <HiBars3 className="w-7 h-7" />
           </button>
         </Container>
       </motion.nav>

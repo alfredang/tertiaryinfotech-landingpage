@@ -26,7 +26,7 @@ const MobileNavLink = ({ to, label, onClose }) => {
         offset={-80}
         duration={600}
         onClick={onClose}
-        className="text-2xl font-semibold text-gray-200 hover:text-neon-cyan transition-colors duration-200 cursor-pointer"
+        className="text-2xl font-semibold text-gray-200 active:text-neon-cyan transition-colors duration-150 cursor-pointer"
       >
         {label}
       </ScrollLink>
@@ -37,7 +37,7 @@ const MobileNavLink = ({ to, label, onClose }) => {
     <RouterLink
       to={`/#${to}`}
       onClick={onClose}
-      className="text-2xl font-semibold text-gray-200 hover:text-neon-cyan transition-colors duration-200 cursor-pointer"
+      className="text-2xl font-semibold text-gray-200 active:text-neon-cyan transition-colors duration-150 cursor-pointer"
     >
       {label}
     </RouterLink>
@@ -48,67 +48,36 @@ const MobileMenu = ({ open, onClose }) => (
   <AnimatePresence>
     {open && (
       <motion.div
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{ type: 'tween', duration: 0.3 }}
-        className="fixed inset-0 z-50 bg-dark-deeper/95 backdrop-blur-xl flex flex-col overflow-y-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.15 }}
+        className="fixed inset-0 z-50 bg-dark-deeper flex flex-col overflow-y-auto"
       >
         {/* Close button */}
         <div className="flex justify-end p-4">
           <button
             onClick={onClose}
-            className="text-white p-2 cursor-pointer"
+            className="text-white p-3 -m-1 active:scale-90 transition-transform cursor-pointer"
             aria-label="Close menu"
           >
-            <HiXMark className="w-6 h-6" />
+            <HiXMark className="w-7 h-7" />
           </button>
         </div>
 
         {/* Nav links */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-          }}
-          className="flex flex-col items-center justify-center flex-1 gap-5 py-8"
-        >
+        <div className="flex flex-col items-center justify-center flex-1 gap-6 py-8">
           {MOBILE_NAV.map((link) => (
-            <motion.div
-              key={link.to}
-              variants={{
-                hidden: { x: 50, opacity: 0 },
-                visible: { x: 0, opacity: 1 },
-              }}
-            >
-              <MobileNavLink to={link.to} label={link.label} onClose={onClose} />
-            </motion.div>
+            <MobileNavLink key={link.to} to={link.to} label={link.label} onClose={onClose} />
           ))}
 
           {/* Portfolio accordion */}
-          <motion.div
-            variants={{
-              hidden: { x: 50, opacity: 0 },
-              visible: { x: 0, opacity: 1 },
-            }}
-          >
-            <PortfolioMobileMenu onClose={onClose} />
-          </motion.div>
+          <PortfolioMobileMenu onClose={onClose} />
 
           {MOBILE_NAV_AFTER.map((link) => (
-            <motion.div
-              key={link.to}
-              variants={{
-                hidden: { x: 50, opacity: 0 },
-                visible: { x: 0, opacity: 1 },
-              }}
-            >
-              <MobileNavLink to={link.to} label={link.label} onClose={onClose} />
-            </motion.div>
+            <MobileNavLink key={link.to} to={link.to} label={link.label} onClose={onClose} />
           ))}
-        </motion.div>
+        </div>
       </motion.div>
     )}
   </AnimatePresence>
