@@ -16,21 +16,17 @@ const MegaMenuDropdown = ({ open, onClose }) => {
             onMouseEnter={() => {}}
             onMouseLeave={onClose}
           />
+          <div
+            className="fixed top-20 left-0 w-full z-[100] flex justify-center px-4"
+            onMouseEnter={() => {}}
+            onMouseLeave={onClose}
+          >
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed z-[100]"
-            style={{
-              top: 'calc(5rem + 4px)',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '95vw',
-              maxWidth: '1200px',
-            }}
-            onMouseEnter={() => {}}
-            onMouseLeave={onClose}
+            className="w-full max-w-[1200px]"
           >
             <div
               className="bg-dark-primary/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
@@ -93,6 +89,7 @@ const MegaMenuDropdown = ({ open, onClose }) => {
               </div>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>,
