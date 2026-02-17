@@ -1,6 +1,11 @@
 import { Link as RouterLink } from 'react-router-dom'
 import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa6'
-import { HiEnvelope, HiPhone, HiChatBubbleLeftRight } from 'react-icons/hi2'
+import {
+  HiEnvelope,
+  HiPhone,
+  HiChatBubbleLeftRight,
+  HiMapPin,
+} from 'react-icons/hi2'
 import Container from './Container'
 
 const quickLinks = [
@@ -169,6 +174,15 @@ const Footer = () => {
                   <HiChatBubbleLeftRight className="w-4 h-4" />
                   Contact Form
                 </RouterLink>
+              </li>
+              <li>
+                <div className="flex items-start gap-2 text-sm text-gray-400">
+                  <HiMapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>
+                    12 Woodlands Square, #07-85/86/87, Woods Square Tower 1,
+                    Singapore 737715
+                  </span>
+                </div>
               </li>
             </ul>
           </div>
