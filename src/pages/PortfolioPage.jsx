@@ -87,25 +87,38 @@ const PortfolioPage = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: '-50px' }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
                   >
                     {sub.items.map((item) => (
                       <motion.div key={item.slug} variants={fadeUp()}>
                         <Link
                           to={`/portfolio/${item.slug}`}
-                          className="glass-card p-5 block group hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300 cursor-pointer h-full"
+                          className="glass-card block group hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300 cursor-pointer h-full overflow-hidden rounded-2xl"
                         >
-                          <div className="flex items-start justify-between mb-2">
-                            <h4 className="text-sm font-semibold text-white group-hover:text-neon-cyan transition-colors leading-tight">
-                              {item.name}
-                            </h4>
-                            {item.featured && (
-                              <HiStar className="w-4 h-4 text-amber-400 flex-shrink-0 ml-2" />
-                            )}
+                          {item.images?.hero && (
+                            <div className="overflow-hidden aspect-video">
+                              <img
+                                src={item.images.hero}
+                                alt={item.name}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
+                            </div>
+                          )}
+                          <div className="p-5">
+                            <div className="flex items-start justify-between mb-2">
+                              <h4 className="text-sm font-semibold text-white group-hover:text-neon-cyan transition-colors leading-tight">
+                                {item.name}
+                              </h4>
+                              {item.featured && (
+                                <HiStar className="w-4 h-4 text-amber-400 flex-shrink-0 ml-2" />
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                              {item.description}
+                            </p>
                           </div>
-                          <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
-                            {item.description}
-                          </p>
                         </Link>
                       </motion.div>
                     ))}

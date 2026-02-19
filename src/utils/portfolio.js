@@ -15,7 +15,7 @@ const slug = (name) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
 
-const makeProject = (name, description, { featured = false, demoUrl = '', githubUrl = '', techStack = [], features = [] } = {}) => ({
+const makeProject = (name, description, { featured = false, demoUrl = '', githubUrl = '', techStack = [], features = [], images = null, overview = [] } = {}) => ({
   name,
   slug: slug(name),
   description,
@@ -24,6 +24,8 @@ const makeProject = (name, description, { featured = false, demoUrl = '', github
   githubUrl,
   techStack,
   features,
+  images,
+  overview,
 })
 
 export const PORTFOLIO_CATEGORIES = [
@@ -39,6 +41,14 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://ai-lms-tms.vercel.app/',
             githubUrl: 'https://github.com/alfredang/AI-LMS-TMS',
             techStack: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'Google Gemini', 'SSG API'],
+            images: {
+              hero: '/portfolio/ai-learning-training-management-system/learner-dashboard.png',
+              gallery: [
+                '/portfolio/ai-learning-training-management-system/admin-dashboard.png',
+                '/portfolio/ai-learning-training-management-system/learner-courses.png',
+                '/portfolio/ai-learning-training-management-system/login-page.png',
+              ],
+            },
             features: [
               'AI-Powered Learning with Google Gemini chatbot',
               'Course Management (create, edit, manage courses with learning units)',
@@ -58,12 +68,24 @@ export const PORTFOLIO_CATEGORIES = [
               'Multi-role Support (Learner, Trainer, Admin, Developer, Training Provider)',
               'File Uploads (CV, certificates, profile pictures)',
             ],
+            overview: [
+              'AI Learning & Training Management System is a comprehensive platform designed specifically for Singapore\'s SkillsFuture training ecosystem. It combines the functionality of a Learning Management System (LMS) with a Training Management System (TMS), enhanced with AI capabilities powered by Google Gemini. The platform serves as a complete solution for managing courses, learners, trainers, and training providers.',
+              'The system integrates directly with SkillsFuture Singapore\'s API, enabling real-time validation of Singapore-specific data including NRIC/FIN numbers and UEN (Unique Entity Numbers). It supports a multi-role architecture accommodating learners, trainers, administrators, developers, and training providers, each with tailored interfaces and permissions.',
+              'Built with modern web technologies including Next.js 14, TypeScript, and React 18, the platform offers course management, enrollment tracking, assessments, certificate generation, and an AI-powered chatbot for enhanced learning experiences. The system is backed by PostgreSQL for robust data management and features JWT-based authentication for secure access control.',
+            ],
           }),
           makeProject('LearnHub', 'AI-powered Learning Management System for personalized and intelligent education workflows with centralized course management and analytics.', {
             featured: true,
             demoUrl: 'https://ai-lms-xi.vercel.app/',
             githubUrl: 'https://github.com/alfredang/ai-lms',
             techStack: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'AI'],
+            images: {
+              hero: '/portfolio/learnhub/homepage-hero.png',
+              gallery: [
+                '/portfolio/learnhub/course-categories.png',
+                '/portfolio/learnhub/featured-courses.png',
+              ],
+            },
             features: [
               'AI-Powered Learning with context-aware chatbot',
               'Gamification (XP points, badges, levels, learning streaks)',
@@ -83,12 +105,25 @@ export const PORTFOLIO_CATEGORIES = [
               'Superadmin Settings for AI Configuration',
               'API Key Management',
             ],
+            overview: [
+              'AI-Powered Learning Management System is a production-ready platform built with Next.js 14 featuring intelligent learning assistance and comprehensive course management. The system supports multiple AI providers including OpenAI, Google Gemini, Anthropic Claude, OpenRouter, and DeepSeek for personalized, context-aware learning support.',
+              'The platform includes 21 courses across 7 categories spanning Real Estate, Investment, Soft Skills, Generative AI, Agentic AI, Full Stack Development, Cloud Computing, and Digital Marketing. Each course features delivery type tags for Instructor-Led or E-Learning formats with Classroom or Virtual session options.',
+              'Gamification elements drive engagement through XP points, achievement badges, level progression, and learning streak tracking. Four distinct user roles provide tailored experiences with separate dashboards and permissions for learners, trainers, administrators, and superadmins. The platform includes dark/light mode themes, responsive design, and secure authentication via NextAuth with OAuth support.',
+            ],
           }),
           makeProject('Learnify Childcare', 'Corporate e-learning platform for childcare professionals in Singapore with parent engagement tools and Stripe payments.', {
             featured: true,
             demoUrl: 'https://alfredang.github.io/learnify-childcare/',
             githubUrl: 'https://github.com/alfredang/learnify-childcare',
             techStack: ['Next.js 16', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe'],
+            images: {
+              hero: '/portfolio/learnify-childcare/learner-dashboard.png',
+              gallery: [
+                '/portfolio/learnify-childcare/course-cards-grid.png',
+                '/portfolio/learnify-childcare/readme-docs-page.png',
+                '/portfolio/learnify-childcare/video-lecture-player.png',
+              ],
+            },
             features: [
               'Multi-tenant Corporate Training Platform',
               'ECDA-Aligned Course Management',
@@ -108,11 +143,23 @@ export const PORTFOLIO_CATEGORIES = [
               'Role-Based Access (Super Admin, Corporate Admin, Learner)',
               'Learner Progress Reports',
             ],
+            overview: [
+              'Learnify Childcare is a corporate e-learning platform designed specifically for early childhood education professionals in Singapore. The system enables childcare organizations to assign ECDA-aligned courses to educators while tracking progress and awarding CPD (Continuing Professional Development) points through a structured online learning environment.',
+              'The platform implements multi-tenant architecture with organization-scoped data isolation, allowing corporate administrators to manage educator invitations, course assignments with deadlines, and comprehensive progress tracking. Learners access assigned courses with video lectures, text materials, and quizzes while earning CPD points toward professional development requirements.',
+              'The system includes 8 pre-seeded courses covering essential childcare topics such as CPR & First Aid, Child Development Milestones, Early Literacy Strategies, Nutrition Planning, Behavior Management, Parent Communication, ECDA Compliance, and Inclusive Education. Each course features SCORM-compatible progress tracking and automatic certificate generation upon completion.',
+            ],
           }),
           makeProject('Lumina Training Management System', 'Enterprise training management with scheduling, compliance tracking, and reporting for organizations.', {
             featured: true,
             githubUrl: 'https://github.com/alfredang/lumina',
             techStack: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
+            images: {
+              hero: '/portfolio/lumina-training-management-system/homepage-hero.png',
+              gallery: [
+                '/portfolio/lumina-training-management-system/admin-dashboard.png',
+                '/portfolio/lumina-training-management-system/course-catalog.png',
+              ],
+            },
             features: [
               'Multi-Tenant Architecture for training providers',
               'Role-Based Access Control',
@@ -130,11 +177,24 @@ export const PORTFOLIO_CATEGORIES = [
               'Separate Frontend and Backend (Vite + Express)',
               'Serverless Postgres with Neon',
             ],
+            overview: [
+              'Lumina is a sophisticated training management system specifically tailored for Singapore\'s education landscape. The platform provides multi-tenant architecture supporting multiple training providers with role-based access control for learners, trainers, administrators, and developers, ensuring secure and appropriate access across all user types.',
+              'The system handles complete course management with hierarchical content structure, class scheduling, trainer and venue coordination, and intelligent enrollment with automated fee calculations. Payment processing is seamlessly integrated through Stripe, while support for six major Singapore funding schemes—including SSG, SkillsFuture Credit, PSEA, MCES, UTAP, and IBF—automates subsidy calculations from 50-70% depending on program type and learner eligibility.',
+              'Built with React 18.3, TypeScript, Node.js, and PostgreSQL on Vercel and Neon serverless infrastructure, Lumina integrates Gemini AI for personalized learning paths. The platform tracks learner progress, manages assessments, and provides comprehensive analytics for training providers to optimize their educational offerings.',
+            ],
           }),
           makeProject('Learnify', 'Modern online learning marketplace with course creation, video streaming, Stripe payments, and role-based access for students, instructors, and admins.', {
             demoUrl: 'https://learnify-corporate-training-platform.netlify.app/',
             githubUrl: 'https://github.com/alfredang/Learnify',
             techStack: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Stripe'],
+            images: {
+              hero: '/portfolio/learnify/homepage-hero.png',
+              gallery: [
+                '/portfolio/learnify/browse-categories.png',
+                '/portfolio/learnify/course-cards-pricing.png',
+                '/portfolio/learnify/instructor-cta.png',
+              ],
+            },
             features: [
               'Browse and search courses with smart filters',
               'Shopping cart system for course purchases',
@@ -152,6 +212,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Role-based access control (student, instructor, admin)',
               'OAuth authentication support',
             ],
+            overview: [
+              'Learnify is a comprehensive online learning platform built with modern web technologies. It serves as a complete marketplace where instructors can create and monetize courses while students learn and grow their skills. The platform implements a sophisticated role-based access control system with distinct experiences for students, instructors, and administrators.',
+              'Students can browse and search courses with advanced filtering, enroll in free or paid courses, track their learning progress, watch video lectures via Cloudinary player, and earn auto-generated completion certificates. The platform features a shopping cart with multi-course checkout, course ratings and reviews, wishlists, and a fully responsive mobile design for learning on the go.',
+              'Instructors can create rich multimedia courses with multiple sections and lectures, upload videos through Cloudinary, set flexible pricing options, and access comprehensive analytics dashboards. The platform operates on a 70% revenue share model for instructors, allowing them to track earnings and monitor student engagement metrics while maintaining full control over their content.',
+            ],
           }),
         ],
       },
@@ -162,6 +227,14 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://alfredang.github.io/escaperooms/',
             githubUrl: 'https://github.com/alfredang/escaperooms',
             techStack: ['HTML5', 'CSS3', 'JavaScript'],
+            images: {
+              hero: '/portfolio/educational-escape-rooms/algorithm-puzzle.png',
+              gallery: [
+                '/portfolio/educational-escape-rooms/room-selection-hub.png',
+                '/portfolio/educational-escape-rooms/title-screen.png',
+                '/portfolio/educational-escape-rooms/ai-hint-popup.png',
+              ],
+            },
             features: [
               '5 themed rooms (Space Operations, Food Systems, Ethics, Green Tech, Cyber City)',
               '15+ unique puzzles (flowcharts, dashboards, decision trees, crosswords, simulations)',
@@ -176,11 +249,23 @@ export const PORTFOLIO_CATEGORIES = [
               'Keyboard navigation accessibility',
               'Vanilla JavaScript implementation',
             ],
+            overview: [
+              'The AI Vault: Escape the Future is a gamified learning platform designed for corporate training, polytechnic programs, and AI literacy initiatives. The system enables adult learners to explore complex technology concepts through puzzle-solving across five themed environments: Space Operations, Food Systems, Ethics Archive, Green Tech, and Cyber City.',
+              'The platform features 15+ unique puzzles including flowcharts, dashboards, decision trees, crosswords, simulations, and code debugging challenges that teach algorithms, data analysis, governance, systems thinking, and cybersecurity. AI-powered hints use Socratic questioning methods via OpenAI GPT-4o-mini or Anthropic Claude to guide learners without directly revealing answers.',
+              'Built with vanilla HTML5, CSS3, and JavaScript, the single-page application includes synthesized audio via Web Audio API, auto-save functionality through localStorage, responsive design for all devices, an achievement badge system, and a meta puzzle finale that combines artifacts from all rooms. The platform serves as an engaging alternative to traditional e-learning for teaching AI fundamentals and computational thinking.',
+            ],
           }),
           makeProject('Musical Timer Countdown', 'Polished, distraction-free countdown timer for classes, study blocks, and focused breaks with sound previews and looping alarm tracks.', {
             demoUrl: 'https://alfredang.github.io/musical-timer-countdown/',
             githubUrl: 'https://github.com/alfredang/musical-timer-countdown',
             techStack: ['HTML', 'CSS', 'JavaScript'],
+            images: {
+              hero: '/portfolio/musical-timer-countdown/timer-ready-state.png',
+              gallery: [
+                '/portfolio/musical-timer-countdown/timer-alarm-state.png',
+                '/portfolio/musical-timer-countdown/settings-panel.png',
+              ],
+            },
             features: [
               'Preset times (15m, 30m, 45m, 1h, 1h 15m, 1h 30m)',
               'Manual time input option',
@@ -196,11 +281,24 @@ export const PORTFOLIO_CATEGORIES = [
               'Fully responsive design',
               'Vanilla HTML5, CSS3, and JavaScript',
             ],
+            overview: [
+              'Musical Class Break Timer is a modern countdown timer application designed specifically for classroom management, study sessions, and productivity breaks. Built entirely with vanilla HTML, CSS, and JavaScript without framework dependencies, the application provides teachers and students with an intuitive time management tool.',
+              'The timer features six preset durations (15m, 30m, 45m, 1h, 1h 15m, 1h 30m) for quick access alongside custom time input allowing hours, minutes, and seconds specification. Accurate timing using Date.now() prevents drift during countdown while an animated circular progress ring displays remaining time visually. Users can pause, resume, and reset the timer without losing progress.',
+              'The sound alert system includes three built-in alarm options (Dream, Inspire, Wing) plus custom MP3 upload functionality with 5MB maximum file size. Looping alarms continue until manually stopped with volume slider and mute toggle controls. Six color themes (Default Blue, Ocean, Forest, Sunset, Purple, Rose) personalize the interface while browser localStorage preserves preferences across sessions. The responsive mobile-optimized design ensures functionality across all devices.',
+            ],
           }),
           makeProject('Phonics AI', 'Interactive phonics learning app for ages 9-15 with games, AI features, and gamification powered by Gemini AI.', {
             demoUrl: 'https://alfredang.github.io/phonics-ai/',
             githubUrl: 'https://github.com/alfredang/phonics-ai',
             techStack: ['Next.js', 'Firebase', 'Google Gemini'],
+            images: {
+              hero: '/portfolio/phonics-ai/landing-page.png',
+              gallery: [
+                '/portfolio/phonics-ai/phonics-lesson.png',
+                '/portfolio/phonics-ai/registration-form.png',
+                '/portfolio/phonics-ai/student-dashboard.png',
+              ],
+            },
             features: [
               '5 learning worlds with progressive curriculum',
               '44 phonemes with complete English sound coverage',
@@ -218,11 +316,25 @@ export const PORTFOLIO_CATEGORIES = [
               'Progress tracking dashboard',
               'Customizable settings for audio and gameplay',
             ],
+            overview: [
+              'Phonics AI is an interactive, game-based learning platform designed for students aged 9-15 to master English pronunciation through structured phonics instruction. The platform combines 95 lessons across 5 learning worlds covering all 44 English phonemes with AI-powered feedback and engaging gamification elements.',
+              'Each lesson follows a four-phase framework: Listen to phoneme examples, Practice pronunciation with AI feedback, Play interactive games to reinforce learning, and Assess understanding through quizzes. The system uses IPA notation with animated mouth position guides and color-coded phoneme categories to help students understand proper articulation.',
+              'Google Gemini API powers intelligent pronunciation analysis while Web Speech API enables real-time voice recording and recognition. Interactive games include Phoneme Pop, Word Builder, Sound Match, Sound Race, Sentence Scramble, and Karaoke Challenge. Students earn XP points, unlock 18 achievement badges, complete daily quests, and build learning streaks to maintain motivation throughout their phonics journey.',
+            ],
           }),
           makeProject('PhonixQuest', 'Vibrant, AI-powered phonics learning adventure for kids. Master sounds, blending, and pronunciation with real-time feedback from Google Gemini.', {
             demoUrl: 'https://alfredang.github.io/PhonixQuest/',
             githubUrl: 'https://github.com/alfredang/PhonixQuest',
             techStack: ['HTML5', 'CSS3', 'JavaScript', 'Google Gemini'],
+            images: {
+              hero: '/portfolio/phonixquest/adventure-map.png',
+              gallery: [
+                '/portfolio/phonixquest/listen-and-learn.png',
+                '/portfolio/phonixquest/speech-practice.png',
+                '/portfolio/phonixquest/mini-game-build-it.png',
+                '/portfolio/phonixquest/lesson-complete.png',
+              ],
+            },
             features: [
               'Gamified learning progression with adventure map system',
               'Level unlocking based on phonetic mastery',
@@ -236,89 +348,24 @@ export const PORTFOLIO_CATEGORIES = [
               'Tailwind CSS 4 styling',
               'Framer Motion smooth animations',
             ],
+            overview: [
+              'PhonixQuest is an AI-powered educational platform that transforms phonics instruction into an engaging quest for children. The application guides young learners through five progressive levels covering the complete phonics learning journey from individual letters to full narrative comprehension.',
+              'The learning journey begins in Letters Land with 44 English phonemes including vowels, consonants, and digraphs, then progresses through Blend Bridge for sound combination techniques, Rule City for phonics patterns like silent-e, Rhythm Road for sentence-level reading and intonation, and culminates in Story Kingdom with paragraph and narrative comprehension.',
+              'Built with React 19 and powered by Google Gemini AI, the platform provides real-time pronunciation feedback while maintaining engagement through gamified achievement systems with XP points, stars, and learning streaks. Responsive design with animation-driven interface and unlockable content creates an accessible and visually appealing learning experience for children.',
+            ],
           }),
         ],
       },
       {
         label: 'Tutorials',
         items: [
-          makeProject('WSQ Courseware Generator', 'AI-powered WSQ courseware generation platform built with Claude Agent SDK and Streamlit. Automates creation of Assessment Plans, Facilitator Guides, Learner Guides, Lesson Plans, Assessments, Slides, and Brochures.', {
-            githubUrl: 'https://github.com/alfredang/wsq-courseware-generator-claude-streamlit',
-            techStack: ['Python', 'Claude Agent SDK', 'Streamlit', 'NotebookLM'],
-            features: [
-              'Automated Assessment Plan generation',
-              'Facilitator Guide creation',
-              'Learner Guide generation',
-              'Lesson Plan development',
-              'Assessment creation with rubrics',
-              'Slide deck generation',
-              'Course brochure design',
-              'Claude Agent SDK integration',
-              'NotebookLM API for content research',
-              'Streamlit web interface',
-              'WSQ compliance for Singapore training providers',
-              'Batch courseware generation',
-              'Customizable templates',
-              'AI-powered content quality checks',
-            ],
-          }),
-          makeProject('Course Helper (SEO & Content)', 'Streamlit dashboard that uses Claude CLI to generate SEO content, AI image prompts, and newsletters for WSQ and non-WSQ courses.', {
-            githubUrl: 'https://github.com/alfredang/course-helper',
-            techStack: ['Python', 'Streamlit', 'Claude AI', 'SEO'],
-            features: [
-              'SEO content generation for courses',
-              'AI-powered course descriptions',
-              'Newsletter content creation',
-              'AI image prompt generation',
-              'WSQ course content optimization',
-              'Non-WSQ course support',
-              'Claude CLI integration',
-              'Streamlit dashboard interface',
-              'Batch content generation',
-              'Marketing copy creation',
-              'Course metadata optimization',
-              'Content export functionality',
-            ],
-          }),
-          makeProject('WSQ/CASL Course Proposal Generator', 'Web app to prepare and submit WSQ and CASL Course Proposals (CP) to SSG TPG, powered by Claude Code content generation and Streamlit UI.', {
-            githubUrl: 'https://github.com/alfredang/wsq-casl-cp-generator',
-            techStack: ['Python', 'Streamlit', 'Claude AI'],
-            features: [
-              'WSQ Course Proposal generation',
-              'CASL Course Proposal generation',
-              'SSG TPG submission format compliance',
-              'Claude Code AI-powered content generation',
-              'Streamlit user interface',
-              'Course outline creation',
-              'Learning outcomes development',
-              'Assessment criteria generation',
-              'Training provider details integration',
-              'Automated proposal formatting',
-              'Export to submission-ready format',
-              'Template-based proposal structure',
-            ],
-          }),
-          makeProject('SSG API Portal', 'Developer tool for exploring SkillsFuture Singapore (SSG-WSG) APIs. Course lookup, search by UEN/keyword, mTLS + OAuth authentication.', {
-            githubUrl: 'https://github.com/alfredang/ssg-api-portal',
-            techStack: ['React', 'TypeScript', 'Express', 'Vite'],
-            features: [
-              'SkillsFuture Singapore (SSG-WSG) API integration',
-              'Course lookup and search functionality',
-              'Search by UEN (Unique Entity Number)',
-              'Keyword-based course search',
-              'mTLS (mutual TLS) authentication',
-              'OAuth 2.0 authentication flow',
-              'React + TypeScript frontend',
-              'Express backend server',
-              'Vite build tooling',
-              'API endpoint testing',
-              'Developer-friendly interface',
-              'Real-time API response viewing',
-            ],
-          }),
           makeProject('AutoGen AI Agents Tutorial', 'Hands-on tutorial for building AI agents with Microsoft AutoGen — covering single agents, tools, multi-agent teams, and human-in-the-loop workflows.', {
             githubUrl: 'https://github.com/alfredang/autogen_tutorial',
             techStack: ['Python', 'AutoGen', 'OpenAI'],
+            images: {
+              hero: '/portfolio/autogen-ai-agents-tutorial/course-overview.png',
+              gallery: [],
+            },
             features: [
               'Single agent development with OpenAI GPT models',
               'Custom tool integration for web search and API calls',
@@ -331,10 +378,19 @@ export const PORTFOLIO_CATEGORIES = [
               'Configuration guidance for API integrations',
               'Python 3.11+ support',
             ],
+            overview: [
+              'This repository provides comprehensive tutorials for building AI agents using Microsoft AutoGen\'s AgentChat framework. It covers the complete spectrum from basic async programming fundamentals to advanced multi-agent team coordination.',
+              'The tutorial demonstrates practical implementation of single-agent assistants, custom tool integration for web search and API interactions, and sophisticated multi-agent teams using RoundRobinGroupChat for specialized agent collaboration. Each concept is presented through working code examples in both Jupyter notebook and standalone script formats.',
+              'Educational institutions, developers, and AI practitioners benefit from this structured learning path. The hands-on approach makes it ideal for courses, self-study, and team training on modern AI agent development with real-world applications.',
+            ],
           }),
           makeProject('Google ADK Tutorial', 'Collection of example AI agents built with Google Agent Development Kit (ADK) featuring multi-agent systems, tool integration, and various LLM providers.', {
             githubUrl: 'https://github.com/alfredang/gemini-adk-tutorial',
             techStack: ['Python', 'Google ADK', 'LLM'],
+            images: {
+              hero: '/portfolio/google-adk-tutorial/course-overview.png',
+              gallery: [],
+            },
             features: [
               'Multiple agent architectures (basic LLM, sequential, parallel, loop agents)',
               'Hierarchical multi-agent system for stock analysis',
@@ -352,10 +408,19 @@ export const PORTFOLIO_CATEGORIES = [
               'Python 3.13+ support',
               'Session management with InMemorySessionService',
             ],
+            overview: [
+              'This repository provides comprehensive examples of AI agents built with Google\'s Agent Development Kit (ADK). It demonstrates the complete range from basic LLM-powered agents to sophisticated hierarchical multi-agent systems with tool integration and session management.',
+              'The tutorial showcases seven distinct agent examples including basic assistants, sequential workflow orchestration, parallel and loop-based structures, and complex multi-agent hierarchies. Each example demonstrates practical integration with Google Search, custom functions, and support for multiple LLM providers via LiteLlm including Gemini, OpenAI, and Claude.',
+              'Developers, AI practitioners, and educational institutions benefit from this structured approach to learning agent development. The repository serves as both a learning resource and a reference implementation for building production-ready AI agent systems with Google\'s ADK framework.',
+            ],
           }),
           makeProject('Langflow & Streamlit Tutorial', 'Learn to build AI workflows with Langflow and deploy interactive apps with Streamlit.', {
             githubUrl: 'https://github.com/alfredang/Langflow-and-Streamlit-Tutorial',
             techStack: ['Python', 'Langflow', 'Streamlit'],
+            images: {
+              hero: '/portfolio/langflow-streamlit-tutorial/course-overview.png',
+              gallery: [],
+            },
             features: [
               'Langflow visual workflow builder integration',
               'Drag-and-drop AI workflow design',
@@ -369,6 +434,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Hands-on code samples',
               'Deployment instructions',
               'Best practices for AI workflow design',
+            ],
+            overview: [
+              'This repository provides comprehensive tutorial code and examples for working with Langflow and Streamlit—two powerful Python-based frameworks for building interactive data applications and AI workflows. It covers the complete spectrum from basic UI components to advanced LLM integrations.',
+              'The tutorial demonstrates Streamlit\'s built-in elements including checkboxes, sliders, radio buttons, sidebars, tables, progress indicators, maps, and text display functions. It also showcases integration with multiple AI model providers including OpenAI, Gemini, Groq, and DeepSeek, along with agent-based implementations and chatbot applications.',
+              'Developers, data scientists, and AI practitioners benefit from this educational resource. The hands-on approach with working examples makes it ideal for learning to combine these frameworks for building AI-powered applications with professional user interfaces and workflow orchestration.',
             ],
           }),
         ],
@@ -385,6 +455,13 @@ export const PORTFOLIO_CATEGORIES = [
           makeProject('Algorithmic Trading Dashboard', 'Automated algorithmic trading dashboard with Gemini 2.0 AI insights, multi-strategy backtesting, and performance comparison.', {
             githubUrl: 'https://github.com/alfredang/algorithmic-trading',
             techStack: ['Python', 'Streamlit', 'Gemini AI', 'yfinance'],
+            images: {
+              hero: '/portfolio/algorithmic-trading-dashboard/dashboard-overview.png',
+              gallery: [
+                '/portfolio/algorithmic-trading-dashboard/strategy-signals-chart.png',
+                '/portfolio/algorithmic-trading-dashboard/strategy-comparison-ai.png',
+              ],
+            },
             features: [
               'Multiple trading strategies (Moving Average, RSI, MACD, Bollinger Bands)',
               'Multi-strategy backtesting engine',
@@ -401,12 +478,25 @@ export const PORTFOLIO_CATEGORIES = [
               'Trade signal generation',
               'Quantitative finance analytics',
             ],
+            overview: [
+              'Algorithmic Trading Dashboard is an automated quant trading simulation tool built with Streamlit, YFinance, and Gemini 2.0 AI. It allows users to simulate various algorithmic trading strategies against historical market data and compare their performance against a Buy & Hold benchmark.',
+              'The dashboard supports multiple technical analysis strategies including SMA/EMA Crossovers, RSI, Bollinger Bands, MACD, and Stochastic Oscillator. Each strategy is visualized with professional-grade interactive Plotly charts showing entry and exit signals, making it easy to understand trading decisions at a glance.',
+              'Integrated Gemini 2.0 Flash AI provides technical analysis on strategy performance and optimization tips, while automated performance metrics calculate Sharpe Ratio, Max Drawdown, Annualized Return, and Volatility for each strategy to help users evaluate risk-adjusted returns.',
+            ],
           }),
           makeProject('Value Investment Academy', 'AI-powered value investing tool with stock screening, financial anomaly detection (M-Score, Z-Score, F-Score), and automated investment report generation for US & Singapore markets.', {
             featured: true,
             demoUrl: 'https://value-investment-academy.streamlit.app/',
             githubUrl: 'https://github.com/alfredang/value-investment',
             techStack: ['Python', 'Streamlit', 'AI', 'Finance APIs'],
+            images: {
+              hero: '/portfolio/value-investment-academy/dark-theme-overview.jpeg',
+              gallery: [
+                '/portfolio/value-investment-academy/anomaly-analysis.png',
+                '/portfolio/value-investment-academy/companies-screening.png',
+                '/portfolio/value-investment-academy/summary-report.png',
+              ],
+            },
             features: [
               'Stock Screener with 10 filtering criteria',
               'Profitability Metrics (Gross Margin, Net Margin, ROA, ROE, FCF Margin)',
@@ -434,10 +524,19 @@ export const PORTFOLIO_CATEGORIES = [
               'Financial Modeling Prep API integration',
               'Command Line Interface',
             ],
+            overview: [
+              'Value Investment Academy is an AI-powered stock analysis platform designed for value investors who want to make data-driven investment decisions. The platform combines fundamental analysis with advanced anomaly detection to identify high-quality investment opportunities while avoiding potential financial risks.',
+              'The system uses a multi-agent AI architecture powered by the OpenAI Agents SDK, featuring specialized agents for screening, anomaly detection, and research. Each agent has specific tools and responsibilities, working together through intelligent handoffs to provide comprehensive investment analysis. The platform integrates real-time data from Tavily, NewsAPI, and Twelve Data to ensure analysis is based on the latest market information.',
+              'Investors can use the web-based interface or command-line tools to screen stocks based on 10 fundamental criteria, perform automated EPV-based valuations, and detect financial anomalies using M-Score, Z-Score, F-Score, and Sloan Ratio metrics. The platform generates comprehensive reports in multiple formats and includes pre-installed agent skills for extended analysis capabilities.',
+            ],
           }),
           makeProject('Stock Analysis Telegram Agent', 'Autonomous multi-agent system delivering real-time stock trade recommendations via Telegram with technical analysis, market sentiment, and AI decision-making.', {
             githubUrl: 'https://github.com/alfredang/stock_analysis_telegram_agent',
             techStack: ['Python', 'Telegram API', 'Multi-Agent AI'],
+            images: {
+              hero: '/portfolio/stock-analysis-telegram-agent/telegram-stock-analysis.png',
+              gallery: [],
+            },
             features: [
               'Multi-agent autonomous trading analysis platform',
               'Multi-timeframe data fetching (1-minute, 15-minute, 1-hour intervals)',
@@ -456,15 +555,27 @@ export const PORTFOLIO_CATEGORIES = [
               'TradeDecisionAgent orchestration',
               'Telegram delivery of recommendations',
             ],
+            overview: [
+              'Stock Analysis Telegram Agent is an intelligent trading analysis system that delivers professional-grade stock recommendations directly through Telegram. The platform uses a "Chain of Thought" approach to analyze stocks, mimicking the workflow of a professional day trader to provide actionable buy, sell, or hold recommendations with precise entry points, stop-loss levels, and target prices.',
+              'When users send a stock symbol through Telegram, the system orchestrates multiple specialized AI agents to gather and analyze data from various sources. It fetches multi-timeframe technical data (1-minute, 15-minute, and 1-hour candles) from TwelveData and retrieves recent market news from NewsAPI. The SentimentAnalyzer agent evaluates news articles to determine market sentiment and impact, while the TradeDecisionAgent combines technical analysis across multiple timeframes with sentiment data to generate comprehensive trade recommendations.',
+              'The platform is designed for active traders who need quick, data-driven insights on-demand. It integrates seamlessly with Telegram for instant mobile access and uses AutoGen\'s multi-agent framework to ensure consistent, professional-quality analysis. The system provides structured recommendations including trade direction, entry price, stop-loss placement, target price, and detailed rationale explaining the decision-making process.',
+            ],
           }),
         ],
       },
       {
         label: 'Productivity Tools',
         items: [
-          makeProject('Markdown To PDF Converter', 'Chrome extension to convert Markdown to beautifully styled PDF with live preview.', {
+          makeProject('Markdown to PDF Converter', 'Chrome extension to convert Markdown to beautifully styled PDF with live preview.', {
             githubUrl: 'https://github.com/alfredang/md2pdf-chrome-extension',
             techStack: ['JavaScript', 'Chrome Extension API'],
+            images: {
+              hero: '/portfolio/markdown-to-pdf-converter/extension-popup.png',
+              gallery: [
+                '/portfolio/markdown-to-pdf-converter/markdown-editor.png',
+                '/portfolio/markdown-to-pdf-converter/theme-settings.png',
+              ],
+            },
             features: [
               'Live markdown preview',
               'GitHub-style styling',
@@ -479,10 +590,21 @@ export const PORTFOLIO_CATEGORIES = [
               'html2pdf.js for PDF generation',
               'Manifest V3 Chrome extension framework',
             ],
+            overview: [
+              'Transform your Markdown content into professional PDF documents with this elegant Chrome extension. Designed for developers, technical writers, and content creators, it provides a split-pane interface where you can write or paste Markdown on the left and see a beautifully rendered preview on the right in real-time.',
+              'Built with marked.js for fast Markdown parsing and html2pdf.js for client-side PDF generation, the extension supports the full range of GitHub Flavored Markdown features including tables, task lists, code blocks with syntax highlighting, and blockquotes. The output PDFs are formatted for A4 paper with proper margins and clean, professional GitHub-style rendering.',
+              'Perfect for creating documentation, README files, technical reports, or any content that requires professional PDF output from Markdown source. The extension processes everything client-side in your browser, ensuring privacy and speed. Simply type or paste your Markdown, customize the filename if desired, and download a polished PDF document ready for sharing or distribution.',
+            ],
           }),
-          makeProject('Rich Text To Markdown Converter', 'Chrome extension to convert rich text to GitHub Flavored Markdown. Paste from Word, Google Docs, or any webpage and get clean markdown instantly.', {
+          makeProject('Rich Text to Markdown Converter', 'Chrome extension to convert rich text to GitHub Flavored Markdown. Paste from Word, Google Docs, or any webpage and get clean markdown instantly.', {
             githubUrl: 'https://github.com/alfredang/md-converter-chrome-extension',
             techStack: ['JavaScript', 'Chrome Extension API'],
+            images: {
+              hero: '/portfolio/rich-text-to-markdown-converter/converter-popup.png',
+              gallery: [
+                '/portfolio/rich-text-to-markdown-converter/extension-in-browser.png',
+              ],
+            },
             features: [
               'Auto-convert on paste functionality',
               'GitHub Flavored Markdown support',
@@ -495,10 +617,19 @@ export const PORTFOLIO_CATEGORIES = [
               'Google Docs conversion support',
               'Web content conversion',
             ],
+            overview: [
+              'Streamline your content workflow with this powerful Chrome extension that transforms rich text into clean, ready-to-use markdown. Perfect for developers, technical writers, and content creators who need to convert formatted content from Word, Google Docs, or web pages into GitHub Flavored Markdown instantly.',
+              'Built with Turndown.js and the GitHub Flavored Markdown plugin, the extension handles complex formatting including tables, strikethrough text, and task lists. Simply paste your rich text content and watch it transform into clean markdown automatically – no manual reformatting needed.',
+              'The intuitive interface makes conversion effortless with auto-convert on paste and one-click copy to clipboard. Whether you\'re writing documentation, creating README files, or preparing content for static site generators, this tool eliminates the tedious work of manual markdown conversion while ensuring consistent, professional output every time.',
+            ],
           }),
           makeProject('Strong Password Generator (MCP)', 'MCP server for generating cryptographically secure passwords with customizable rules, strength analysis, and passphrase generation.', {
             githubUrl: 'https://github.com/alfredang/strong-password-generator-mcp',
             techStack: ['Python', 'FastMCP 2.0'],
+            images: {
+              hero: '/portfolio/strong-password-generator-mcp/mcp-password-generator.png',
+              gallery: [],
+            },
             features: [
               'Cryptographically secure password generation',
               'Customizable password length (8-128 characters)',
@@ -514,10 +645,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Password strength checking',
               'Model Context Protocol integration with Claude Desktop',
             ],
+            overview: [
+              'Enhance your security workflow with this powerful password generation tool built on the Model Context Protocol. Designed to integrate directly with Claude Desktop, it provides instant access to cryptographically secure password generation through natural language commands.',
+              'Built with Python\'s secrets module and FastMCP 2.0 framework, this MCP server offers enterprise-grade password generation with flexible customization options. Generate single passwords, create batches of up to 20 passwords at once, or produce memorable passphrases – all through conversational requests to Claude.',
+              'Perfect for security professionals, developers, and anyone who needs strong passwords on demand. The tool includes built-in security analysis with entropy calculations and strength ratings, helps you avoid ambiguous characters, and supports passwords from 8 to 128 characters with full control over symbols, numbers, and case preferences.',
+            ],
           }),
-          makeProject('Word/PPT To PDF Converter', 'Chrome extension to convert Word (.docx) and PowerPoint (.pptx) documents to PDF.', {
+          makeProject('Word/PPT to PDF Converter', 'Chrome extension to convert Word (.docx) and PowerPoint (.pptx) documents to PDF.', {
             githubUrl: 'https://github.com/alfredang/pdf-converter-chrome-extension',
             techStack: ['JavaScript', 'Chrome Extension API'],
+            images: {
+              hero: '/portfolio/word-ppt-to-pdf-converter/conversion-complete.png',
+              gallery: [
+                '/portfolio/word-ppt-to-pdf-converter/conversion-progress.png',
+                '/portfolio/word-ppt-to-pdf-converter/extension-popup.png',
+              ],
+            },
             features: [
               'Word (.docx) to PDF conversion',
               'PowerPoint (.pptx) to PDF conversion',
@@ -532,6 +675,11 @@ export const PORTFOLIO_CATEGORIES = [
               '/convert POST endpoint for conversion',
               'Multipart form data handling',
             ],
+            overview: [
+              'Convert Microsoft Office documents to PDF instantly with this powerful Chrome extension and Python backend solution. Designed for professionals who need reliable document conversion without cloud services, it processes Word and PowerPoint files locally using LibreOffice\'s proven conversion engine.',
+              'The system architecture combines a user-friendly Chrome extension interface with a robust Python backend running Starlette and Uvicorn. LibreOffice operates in headless mode to perform high-quality document conversions while maintaining formatting integrity. Simply drag and drop your files, click convert, and download your PDFs – all processed locally on your machine.',
+              'Perfect for teams requiring privacy-focused document conversion, this tool handles files up to 50MB with 60-second conversion timeouts. The RESTful API design allows integration with other applications, while the Chrome extension provides a convenient interface for everyday document conversion tasks without relying on third-party cloud services.',
+            ],
           }),
         ],
       },
@@ -544,52 +692,75 @@ export const PORTFOLIO_CATEGORIES = [
       {
         label: 'HR Systems',
         items: [
-          makeProject('AI HR Management System', 'AI-powered HR platform with employee management, leave tracking, Singapore CPF payroll, expense claims, and Gemini chatbot.', {
+          makeProject('AI HR Management System', 'AI-powered HR platform with employee management, leave tracking, Singapore CPF payroll, expense claims, and Google Gemini chatbot.', {
             featured: true,
             demoUrl: 'https://ai-hrm.vercel.app/',
             githubUrl: 'https://github.com/alfredang/ai-hrms',
-            techStack: ['Next.js 14', 'TypeScript', 'Prisma', 'Neon Postgres', 'Google Gemini'],
+            techStack: ['Next.js 14', 'TypeScript', 'Prisma', 'Neon Postgres', 'Google Gemini', 'NextAuth', 'Resend', 'jsPDF'],
+            images: {
+              hero: '/portfolio/ai-hr-management-system/dashboard-ai-chatbot.png',
+              gallery: [
+                '/portfolio/ai-hr-management-system/hr-dashboard.png',
+                '/portfolio/ai-hr-management-system/login-page.png',
+                '/portfolio/ai-hr-management-system/payroll-management.png',
+                '/portfolio/ai-hr-management-system/staff-directory.png',
+              ],
+            },
             features: [
-              'Real-time HR Dashboard with pending approvals',
-              'Complete Staff Directory with search and filters',
-              'Grid and List View Options',
-              'Multiple Leave Types (Annual, Sick, Medical, Compassionate)',
-              'Leave Balance Tracking per employee per year',
-              'Leave Request Approval Workflow with email notifications',
-              'Payroll with Singapore CPF Calculations',
-              'Age-Based CPF Rate Adjustments',
-              'Monthly Payslip Generation with PDF download',
-              'Salary Configuration per employee',
-              'Expense Claims with receipt uploads',
-              'Expense Approval Workflow',
-              'Full Calendar with event management',
-              'Color-Coded Event Types (Holidays, Meetings, Training, Company Events, Leave)',
-              'AI Chatbot powered by Google Gemini',
-              'Context-Aware HR Policy Responses',
-              'Manager Assignment and Org Hierarchy',
+              'Real-time HR Dashboard with pending approvals and employee statistics',
+              'Complete Staff Directory with grid/list views, search, and filters',
+              'Leave Management with Annual, Sick, Medical, and Compassionate types',
+              'Leave Balance Tracking with per-employee yearly quotas and auto-deduction',
+              'Singapore CPF Payroll with age-based rates, OW ceiling, and wage ceiling',
+              'Monthly Payslip Generation with detailed PDF download',
+              'Salary Configuration per employee with payment status tracking',
+              'Expense Claims with receipt uploads and multi-status approval workflow',
+              'Full Calendar with color-coded events (Holidays, Meetings, Training, Leave)',
+              'AI Chatbot powered by Google Gemini with HR policy context',
               'Role-Based Access Control (Staff, Manager, HR, Admin)',
-              'Payment Status Tracking',
-              'Floating Chat Widget',
+              'Email notifications via Resend for approvals and updates',
+              'Manager Assignment and Organizational Hierarchy',
+              'NextAuth v5 authentication with shadcn/ui components',
+            ],
+            overview: [
+              'Tertiary AI HRMS is a comprehensive HR platform developed for Tertiary Infotech Academy Pte Ltd, evolved from two development phases — an initial AI-focused HR portal (ai-hrms) and an expanded cross-platform system (tertiary-hrms). The platform delivers comprehensive, AI-powered capabilities across web and mobile platforms, unifying employee management, payroll, leave tracking, and expense claims into a single, streamlined solution.',
+              'The system employs a unified codebase strategy where native apps load the Vercel-deployed URL inside a WebView via Capacitor, sharing a single codebase across all platforms. This approach streamlines development while maintaining native app distribution capabilities, allowing organizations to deploy seamlessly to web, iOS, and Android.',
+              'With role-based access control, automated workflows, email notifications, and Singapore CPF compliance built-in, Tertiary AI HRMS empowers HR teams to manage their workforce efficiently while reducing administrative overhead. The integrated AI chatbot — powered by Gemini, OpenAI, or Anthropic — offers instant assistance for HR policy questions, making it easier for employees to get answers without manual intervention.',
             ],
           }),
-          makeProject('Tertiary HRMS (Cross-Platform)', 'Cross-platform HRMS application for Web, iOS, and Android with payroll, leave management, and PWA capabilities using Capacitor.', {
+          makeProject('Tertiary HRMS (Cross-Platform)', 'Cross-platform HR Management System for Web, iOS, and Android using Capacitor, with multi-AI chatbot support and PWA capabilities.', {
+            demoUrl: 'https://ai-hrms.vercel.app',
             githubUrl: 'https://github.com/alfredang/tertiary-hrms',
-            techStack: ['Next.js', 'TypeScript', 'Prisma', 'Capacitor', 'Tailwind CSS'],
+            techStack: ['Next.js 14', 'TypeScript', 'Prisma', 'Capacitor 8', 'Neon Postgres', 'Tailwind CSS', 'Gemini', 'OpenAI', 'Anthropic'],
+            images: {
+              hero: '/portfolio/tertiary-hrms-cross-platform/dashboard.png',
+              gallery: [
+                '/portfolio/tertiary-hrms-cross-platform/employees.png',
+                '/portfolio/tertiary-hrms-cross-platform/leave-management.png',
+                '/portfolio/tertiary-hrms-cross-platform/expense-claims.png',
+                '/portfolio/tertiary-hrms-cross-platform/payroll.png',
+              ],
+            },
             features: [
-              'Cross-platform deployment (Web, iOS, Android)',
-              'Progressive Web App (PWA) support',
-              'Capacitor for native mobile features',
-              'Employee management system',
-              'Leave tracking and approvals',
-              'Payroll processing',
-              'Expense claims management',
-              'AI-powered HR chatbot',
-              'Mobile-first responsive design',
-              'Native app installation',
-              'Offline capabilities',
-              'Push notifications support',
-              'TypeScript for type safety',
-              'Tailwind CSS for styling',
+              'Cross-platform deployment to Web, iOS, and Android from single codebase',
+              'Capacitor 8 native shells with status bar integration',
+              'Progressive Web App (PWA) with service worker and installability',
+              'Mobile hamburger menu with bottom tab navigation',
+              'Safe area support for notched devices (iPhone, Android)',
+              'Employee management, leave tracking, and payroll with Singapore CPF',
+              'Expense claims with receipt uploads and approval workflows',
+              'AI Chatbot supporting Gemini, OpenAI, and Anthropic providers',
+              'Full calendar with automatic leave event creation',
+              'Role-Based Access Control (Staff, Manager, HR, Admin)',
+              'Email notifications via Resend',
+              'NextAuth v5 authentication with shadcn/ui',
+              'iOS App Store and Android Play Store deployment ready',
+              'Vercel auto-deploy with native apps loading deployed URL',
+            ],
+            overview: [
+              'Tertiary AI HRMS is a comprehensive HR platform developed for Tertiary Infotech Academy Pte Ltd, evolved from two development phases — an initial AI-focused HR portal and an expanded cross-platform system. The platform delivers comprehensive, AI-powered capabilities across web and mobile platforms, unifying employee management, payroll, leave tracking, and expense claims into a single, streamlined solution.',
+              'The system employs a unified codebase strategy where native apps load the Vercel-deployed URL inside a WebView via Capacitor, sharing a single codebase across all platforms. This approach streamlines development while maintaining native app distribution capabilities, allowing organizations to deploy seamlessly to web, iOS, and Android.',
+              'With role-based access control, automated workflows, email notifications, and Singapore CPF compliance built-in, Tertiary AI HRMS empowers HR teams to manage their workforce efficiently while reducing administrative overhead. The integrated AI chatbot — powered by Gemini, OpenAI, or Anthropic — offers instant assistance for HR policy questions, making it easier for employees to get answers without manual intervention.',
             ],
           }),
         ],
@@ -600,6 +771,10 @@ export const PORTFOLIO_CATEGORIES = [
           makeProject('NotebookLM MCP Bridge', 'Bridge connecting Google NotebookLM with Claude via MCP for full programmatic access to create notebooks, manage sources, and generate AI-powered content.', {
             githubUrl: 'https://github.com/alfredang/notebooklm-mcp',
             techStack: ['Python', 'MCP', 'NotebookLM API'],
+            images: {
+              hero: '/portfolio/notebooklm-mcp-bridge/notebooklm-claude-bridge.png',
+              gallery: [],
+            },
             features: [
               'Research management (list and create notebooks)',
               'Content integration (add URLs, text, and files as sources)',
@@ -618,11 +793,23 @@ export const PORTFOLIO_CATEGORIES = [
               'notebooklm-py client library',
               'fastmcp framework support',
             ],
+            overview: [
+              'Bridge the power of Google NotebookLM with Claude\'s advanced reasoning capabilities through this innovative MCP integration. Create and manage research notebooks, add diverse content sources, and generate educational materials – all through natural language commands in Claude Desktop or Claude Code.',
+              'This integration unlocks NotebookLM\'s full potential by enabling automated content creation workflows. Generate AI podcasts, video scripts, slide presentations, mind maps, infographics, quizzes, flashcards, and comprehensive reports directly from your research sources. The tool supports adding URLs, text snippets, and files as source material, making it perfect for researchers, educators, and content creators.',
+              'Built with Python and FastMCP framework, the server provides 13+ specialized tools that transform how you interact with NotebookLM. Whether you\'re conducting deep research, creating educational content, or building interactive learning experiences, this MCP bridge streamlines your workflow by combining NotebookLM\'s organizational power with Claude\'s conversational AI interface.',
+            ],
           }),
           makeProject('Tertiary Infotech Voice Agent', 'AI voice agent landing page for automated customer support and real-time voice calls, powered by Retell.io.', {
             demoUrl: 'https://tertiary-voiceagent.vercel.app/',
             githubUrl: 'https://github.com/alfredang/voiceagent',
             techStack: ['React', 'Retell.io', 'Vercel'],
+            images: {
+              hero: '/portfolio/tertiary-infotech-voice-agent/landing-hero.png',
+              gallery: [
+                '/portfolio/tertiary-infotech-voice-agent/popular-courses.png',
+                '/portfolio/tertiary-infotech-voice-agent/why-choose-us.png',
+              ],
+            },
             features: [
               'Real-time browser-based voice conversations',
               'Retell Web Client SDK integration',
@@ -637,6 +824,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Express server for local development',
               'Inter typography',
             ],
+            overview: [
+              'AI Voice Agent is a professional landing page showcasing advanced conversational AI technology powered by Retell.io. The platform features Sarah, an intelligent voice assistant capable of handling real-time voice conversations directly in the browser, complemented by a chat widget for text-based interactions.',
+              'The application provides an animated voice call interface with speaking indicators and call timers, creating an engaging user experience. The mobile-responsive design uses Inter typography for clean, modern aesthetics while maintaining full functionality across all devices.',
+              'Built with HTML, CSS, and JavaScript using Retell Web Client SDK, the system employs Vercel serverless functions to protect API credentials from client exposure. Local development is supported through Express.js, making it easy to test before production deployment on Vercel\'s hosting platform.',
+            ],
           }),
         ],
       },
@@ -647,6 +839,13 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://content-creators.streamlit.app/',
             githubUrl: 'https://github.com/alfredang/content-creators-crewai',
             techStack: ['Python', 'CrewAI', 'Streamlit'],
+            images: {
+              hero: '/portfolio/content-creators-crewai/agent-hierarchy.png',
+              gallery: [
+                '/portfolio/content-creators-crewai/agents-processing.png',
+                '/portfolio/content-creators-crewai/generated-article.png',
+              ],
+            },
             features: [
               'Hierarchical multi-agent team',
               'Content Director agent for task coordination',
@@ -667,11 +866,23 @@ export const PORTFOLIO_CATEGORIES = [
               'Tavily search capabilities',
               'Python 3.10-3.13 support',
             ],
+            overview: [
+              'Multi Agent Content Creator is a sophisticated content generation platform that employs four specialized AI agents working in a hierarchical team structure. The Content Director orchestrates collaboration, the Research Specialist gathers information using Tavily Search, the Content Writer transforms research into engaging articles, and the Content Editor ensures quality and clarity.',
+              'The workflow follows a structured pipeline from user input through research, writing, and editing phases, delivering polished markdown-formatted articles. Each agent specializes in their domain, ensuring professional results through expert task delegation and quality control at every stage.',
+              'Built with CrewAI framework and featuring a chat-style Streamlit interface, the platform provides real-time status updates during generation, formatted output, and customizable agent configurations. Users can generate professional articles in minutes without requiring content creation expertise.',
+            ],
           }),
           makeProject('Groovy Dance Studio', 'AI-powered creative studio for dance generation, image creation/editing, media analysis, and intelligent chat powered by Google Gemini.', {
             demoUrl: 'https://groovydance-app.netlify.app/',
             githubUrl: 'https://github.com/alfredang/groovydance',
             techStack: ['React', 'Google Gemini', 'Netlify'],
+            images: {
+              hero: '/portfolio/groovy-dance-studio/image-studio.png',
+              gallery: [
+                '/portfolio/groovy-dance-studio/dance-generator.png',
+                '/portfolio/groovy-dance-studio/analysis-lab.png',
+              ],
+            },
             features: [
               'Dance generator for transforming photos into dancing characters',
               'Photo upload capability',
@@ -691,11 +902,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Netlify deployment',
               'Serverless backend functions',
             ],
+            overview: [
+              'GrooveGen AI Studio is a comprehensive creative platform that leverages Google\'s Gemini API to bring AI-powered creativity to your fingertips. The platform offers multiple creative tools including dance generation, image creation and editing, media analysis, and an intelligent AI assistant—all unified in a single, intuitive interface.',
+              'The application uses cutting-edge AI technology to transform static photos into dynamic dance animations, generate original artwork from text descriptions, edit existing images with natural language commands, and analyze visual media to provide detailed insights. Each feature is designed to make advanced AI capabilities accessible to users without requiring technical expertise.',
+              'Built with modern web technologies and powered by Google\'s latest Gemini models, GrooveGen AI Studio represents the future of creative AI tools. Whether you\'re creating content, analyzing media, or exploring artistic possibilities, the platform provides professional-grade AI capabilities through a user-friendly interface.',
+            ],
           }),
           makeProject('Idea Galaxy', 'Space-themed idea visualization platform where ideas appear as glowing stars. Create, connect, and evolve ideas with AI-powered discovery.', {
             demoUrl: 'https://idea-galaxy.netlify.app/',
             githubUrl: 'https://github.com/alfredang/idea-galaxy',
             techStack: ['React', 'FastAPI', 'MongoDB'],
+            images: {
+              hero: '/portfolio/idea-galaxy/edit-idea-modal.png',
+              gallery: [
+                '/portfolio/idea-galaxy/galaxy-constellation.png',
+              ],
+            },
             features: [
               'Interactive galaxy canvas visualization',
               'Ideas represented as glowing stars with colors and sizes',
@@ -708,6 +930,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Public galaxy sharing via links',
               'Responsive design for desktop and mobile',
             ],
+            overview: [
+              'Idea Galaxy is an innovative idea management platform that transforms the traditional note-taking experience into an interactive visual journey. Ideas are represented as glowing stars in a cosmic canvas, with different colors and sizes indicating their development status—from initial sparks to completed concepts.',
+              'The platform goes beyond simple idea storage by allowing users to create constellation links between related ideas, visualizing connections in an intuitive and beautiful way. With AI-powered discovery, users can find similar ideas from other users based on keyword matching, fostering collaboration and inspiration across the community.',
+              'Built on modern web technologies with React and FastAPI, Idea Galaxy combines stunning visual design with practical functionality. Whether you\'re brainstorming, organizing projects, or exploring creative connections, the platform provides a unique space-themed environment that makes idea management engaging and enjoyable.',
+            ],
           }),
         ],
       },
@@ -717,6 +944,13 @@ export const PORTFOLIO_CATEGORIES = [
           makeProject('LeRobot — AI Robotics', 'Robotics project integrating LeRobot framework with ChatGPT-4o Vision API for intelligent control of a LeKiwi mobile manipulator.', {
             githubUrl: 'https://github.com/alfredang/lerobot',
             techStack: ['Python', 'LeRobot', 'ROS2', 'GPT-4o Vision'],
+            images: {
+              hero: '/portfolio/lerobot-ai-robotics/arm-positions.png',
+              gallery: [
+                '/portfolio/lerobot-ai-robotics/robot-closeup.png',
+                '/portfolio/lerobot-ai-robotics/robot-top-view.png',
+              ],
+            },
             features: [
               'Manual teleoperation with leader-follower arm control',
               'Vision-only autonomous mode with ChatGPT-4o Vision API',
@@ -735,6 +969,11 @@ export const PORTFOLIO_CATEGORIES = [
               'HTTP REST for camera streaming',
               'SLAM data communication over HTTP',
             ],
+            overview: [
+              'This robotics integration combines the LeRobot framework from HuggingFace with ChatGPT-4o Vision API for intelligent control of a LeKiwi mobile manipulator. The system enables three operational modes including manual teleoperation via leader-follower arm control, vision-only autonomous control for object manipulation, and SLAM-enabled autonomous navigation with real-time mapping capabilities.',
+              'The platform features a 6-DOF robotic arm with gripper mounted on a 3-wheel omnidirectional mobile base, dual-camera system with front and wrist-mounted cameras for environmental awareness, RPLidar A1 for 2D SLAM functionality, and real-time ChatGPT-4o Vision integration for AI-driven decision making. The system runs on a Jetson Orin Nano 8GB controller with ROS2 Humble for advanced navigation features.',
+              'Communication flows through a distributed architecture where user commands are sent from a laptop controller to the Jetson via ZMQ messaging at 30Hz for motor control, while camera images stream back via HTTP REST endpoints. The system successfully demonstrates autonomous pick-and-place tasks with multiple test objects, showcasing full ChatGPT reasoning during task execution.',
+            ],
           }),
         ],
       },
@@ -752,6 +991,13 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://propertyguruking.netlify.app/',
             githubUrl: 'https://github.com/alfredang/propertyfinder',
             techStack: ['Next.js 14', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS'],
+            images: {
+              hero: '/portfolio/property-finder/homepage-hero-search.png',
+              gallery: [
+                '/portfolio/property-finder/listings-recently-added.png',
+                '/portfolio/property-finder/property-types-featured.png',
+              ],
+            },
             features: [
               'Advanced Property Search with multiple filters',
               'Location-Based Filtering',
@@ -779,11 +1025,22 @@ export const PORTFOLIO_CATEGORIES = [
               'React Query for state management',
               '120+ seed properties',
             ],
+            overview: [
+              'PropertyFinder is a comprehensive property listing platform built with modern web technologies to deliver an exceptional property discovery experience. Modeled after PropertyGuru Singapore, it combines powerful search capabilities with intuitive user interfaces to help users find their ideal properties.',
+              'The platform offers extensive search and filtering options, detailed property listings with mapping functionality, and user authentication including Google OAuth integration. Built with Next.js 14 and TypeScript, it features a mobile-first responsive design optimized for all devices. Image handling through Cloudinary and interactive maps via Mapbox GL JS enhance the user experience.',
+              'PropertyFinder includes an admin dashboard for content management, SEO optimization through server-side rendering, and favorites/watchlist functionality for saving preferred properties. The platform supports multiple user roles including admin, agent, and standard user accounts, making it suitable for real estate agencies and property marketplaces.',
+            ],
           }),
           makeProject('Property Advisor', 'Intelligent property advisory tool with market analysis, property discovery, and management features.', {
             demoUrl: 'https://propertyadvisor-frontend.vercel.app/',
             githubUrl: 'https://github.com/alfredang/propertyadvisor',
             techStack: ['React', 'Node.js', 'Vercel'],
+            images: {
+              hero: '/portfolio/property-advisor/homepage-search-featured.png',
+              gallery: [
+                '/portfolio/property-advisor/property-listings-grid.png',
+              ],
+            },
             features: [
               'Modern responsive UI with Next.js 14',
               'Advanced property search by location, price, and type',
@@ -803,6 +1060,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Vercel deployment',
               'Docker support for local development',
             ],
+            overview: [
+              'PropertyAdvisor is a full-stack real estate platform clone that brings sophisticated property browsing capabilities to users seeking Singapore real estate. The platform combines modern web technologies to deliver a seamless property discovery experience with robust backend infrastructure.',
+              'The system features responsive interfaces with location and price filtering, detailed property listings with image galleries, and watchlist functionality. Built on a distributed architecture, it separates frontend and backend concerns for optimal performance. The backend implements role-based access control, distinguishing between administrators and standard users.',
+              'Pre-seeded with 110+ property records, PropertyAdvisor enables immediate exploration of diverse listings. The platform welcomes contributions under MIT licensing and draws inspiration from PropertyGuru Singapore\'s proven design patterns, making it an ideal foundation for real estate technology ventures.',
+            ],
           }),
         ],
       },
@@ -814,6 +1076,12 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://recycle-resell.netlify.app/',
             githubUrl: 'https://github.com/alfredang/recycle-resell',
             techStack: ['Next.js', 'Prisma', 'Netlify'],
+            images: {
+              hero: '/portfolio/recycle-resell/homepage-categories-listings.png',
+              gallery: [
+                '/portfolio/recycle-resell/listings-scroll.png',
+              ],
+            },
             features: [
               'User Authentication with email/password or Google OAuth',
               'Listing Management (create, edit, delete listings)',
@@ -838,11 +1106,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Neon Serverless PostgreSQL',
               'Complete Documentation on GitHub Pages',
             ],
+            overview: [
+              'ReResell transforms the second-hand marketplace experience by combining sustainability with smart technology. The platform makes it easy for users to buy and sell pre-loved items, reducing waste while helping people save money through a modern, intuitive interface that prioritizes mobile-first design.',
+              'Built with Next.js 16 and TypeScript, the platform offers sophisticated filtering capabilities allowing users to search by category, price range, condition, and location. Buyers can create personalized watchlists, negotiate offers, and communicate directly with sellers through real-time messaging powered by Pusher. The application supports multiple authentication methods including email/password and Google OAuth for seamless onboarding.',
+              'Sellers benefit from an easy-to-use listing creation system with support for multiple images stored via Vercel Blob. The platform includes a comprehensive review and rating system that builds trust within the community, while the responsive design with bottom navigation ensures smooth experiences across all devices.',
+            ],
           }),
           makeProject('AI Trip Advisor', 'Interactive AI-driven trip planning app with multi-agent orchestration generating personalized travel itineraries based on user preferences.', {
             demoUrl: 'https://trip-advisor-openrouter.streamlit.app/',
             githubUrl: 'https://github.com/alfredang/trip-advisor',
             techStack: ['Python', 'Streamlit', 'Multi-Agent AI'],
+            images: {
+              hero: '/portfolio/ai-trip-advisor/budget-breakdown.png',
+              gallery: [
+                '/portfolio/ai-trip-advisor/trip-itinerary-output.png',
+              ],
+            },
             features: [
               'Interactive user interface for destination input',
               'Trip duration customization',
@@ -860,11 +1139,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Tavily real-time web search integration',
               'Personalized recommendations based on preferences',
             ],
+            overview: [
+              'AI Trip Planner is a sophisticated multi-agent system that orchestrates five specialized AI agents working in concert to create comprehensive, personalized travel plans. Users simply input their destination, trip duration, budget, and preferences, and the system coordinates multiple autonomous agents to deliver a complete travel package.',
+              'The platform employs a Planner Agent for itinerary creation, Budget Agent for cost tracking, Local Guide Agent for food and experience recommendations, Research Agent for current travel updates, and a Travel Agent that orchestrates all components. This multi-agent architecture ensures every aspect of trip planning is handled by a specialized expert.',
+              'Built with Streamlit and powered by OpenAI Agents SDK with Gemini 2.5 Flash Lite through OpenRouter, the system delivers professional-grade travel planning with real-time web search integration via Tavily. Users receive structured schedules, itemized budgets, local insights, and downloadable trip documents—all generated in minutes.',
+            ],
           }),
           makeProject('EV Charging Points Singapore', 'Interactive map of EV charging points in Singapore with real-time availability from LTA DataMall API.', {
             demoUrl: 'https://ev-charging-points-sg.vercel.app',
             githubUrl: 'https://github.com/alfredang/ev-charging-points-sg',
             techStack: ['Next.js', 'LTA DataMall API', 'Vercel'],
+            images: {
+              hero: '/portfolio/ev-charging-points-singapore/station-detail-popup.png',
+              gallery: [
+                '/portfolio/ev-charging-points-singapore/station-list-map.png',
+              ],
+            },
             features: [
               'Interactive Google Maps integration',
               'Custom teardrop markers for charging points',
@@ -880,11 +1170,20 @@ export const PORTFOLIO_CATEGORIES = [
               'HTML5, CSS3, Vanilla JavaScript implementation',
               'Vercel serverless functions',
             ],
+            overview: [
+              'Find the nearest EV charging station in Singapore with this comprehensive web application. Built for electric vehicle owners, it integrates live data from Singapore\'s LTA DataMall with interactive Google Maps to show real-time availability and precise locations of every charging point across the island.',
+              'The application automatically detects your current location and sorts all charging stations by distance, making it quick and easy to find the nearest available charger. Color-coded markers provide instant visual feedback on station availability – green for available, orange for partially occupied, red for full, and gray for unknown status.',
+              'Whether you\'re planning a trip or need a quick charge, this tool provides the critical information EV drivers need. Search by location, postal code, or operator name, and access detailed station information with just a click. The responsive design ensures a seamless experience on both mobile and desktop devices.',
+            ],
           }),
           makeProject('Hiking Advisor', 'Modern hiking trail finder with interactive maps, real-time weather, and an AI-powered assistant.', {
             demoUrl: 'https://hiking-advisor.netlify.app/',
             githubUrl: 'https://github.com/alfredang/hiking-advisor',
             techStack: ['Next.js 14', 'TypeScript', 'Google Gemini', 'Netlify'],
+            images: {
+              hero: '/portfolio/hiking-advisor/trail-finder-map-results.png',
+              gallery: [],
+            },
             features: [
               'Interactive trail mapping with Google Maps',
               'Trail markers and polyline paths',
@@ -903,11 +1202,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Metric/imperial unit toggling',
               'Targeting Singapore and Malaysia trails',
             ],
+            overview: [
+              'Hiking Advisor transforms outdoor adventure planning by bringing together comprehensive trail information, live weather data, and intelligent AI recommendations in one seamless platform. Designed for hiking enthusiasts across Southeast Asia, the application helps users discover perfect trails based on their preferences, fitness levels, and current conditions.',
+              'The platform features interactive Google Maps integration with detailed trail markers and route visualization, making it easy to explore hiking options visually. Advanced filtering capabilities allow users to search by difficulty level, distance, elevation gain, and available amenities such as parking, water sources, and scenic viewpoints. Real-time weather conditions provide crucial safety information, while trail galleries sourced from Google Places give hikers a preview of what to expect.',
+              'Powered by Google Gemini AI, the built-in chat assistant offers personalized trail recommendations based on user preferences and hiking history. Users can save favorite trails with persistent local storage, customize their experience with dark mode, and switch between metric and imperial units. Built with Next.js 14 and TypeScript, the platform delivers fast performance and smooth user interactions across all devices.',
+            ],
           }),
           makeProject('Potluck', 'Marketplace platform connecting home chefs with food lovers in Singapore. Book unique home dining experiences.', {
             demoUrl: 'https://potluck-ochre.vercel.app/',
             githubUrl: 'https://github.com/alfredang/potluck',
             techStack: ['Next.js', 'Vercel'],
+            images: {
+              hero: '/portfolio/potluck/homepage-hero-cuisines.png',
+              gallery: [
+                '/portfolio/potluck/how-it-works-cta.png',
+              ],
+            },
             features: [
               'Chef discovery by cuisine type, location, ratings, and price range',
               'Real-time search and category filters',
@@ -924,6 +1234,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Singapore-based home chef marketplace',
               'Direct booking with chefs',
             ],
+            overview: [
+              'Potluck revolutionizes home dining by creating a trusted marketplace where talented home chefs can showcase their culinary skills and connect with food lovers seeking authentic, homemade meals. The platform bridges the gap between professional dining and home cooking, offering unique cultural experiences through Peranakan, Malay, Japanese, Korean, and Indian cuisines.',
+              'The platform features intelligent search and filtering capabilities, enabling users to discover chefs by cuisine type, location, and customer ratings in real-time. Users can submit detailed booking requests including guest counts and dietary preferences, while chefs maintain comprehensive profiles showcasing their menus, specialties, and customer reviews.',
+              'Built on a modern monorepo architecture, Potluck delivers seamless experiences across web and mobile platforms. Chefs can choose from flexible subscription tiers - a free option for beginners, Pro at $19/month for growing businesses, and Unlimited at $49/month for established culinary entrepreneurs looking to scale their operations.',
+            ],
           }),
         ],
       },
@@ -934,6 +1249,12 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://iamgood-psi.vercel.app/',
             githubUrl: 'https://github.com/alfredang/iamgood',
             techStack: ['Next.js', 'Vercel'],
+            images: {
+              hero: '/portfolio/i-am-good/checkin-dashboard.png',
+              gallery: [
+                '/portfolio/i-am-good/onboarding-features.png',
+              ],
+            },
             features: [
               'One-tap check-in button',
               'Health status tags (I\'m okay, I feel unwell, Need to talk)',
@@ -951,11 +1272,22 @@ export const PORTFOLIO_CATEGORIES = [
               '18px base font size',
               'Designed for elderly users and non-technical individuals',
             ],
+            overview: [
+              'I Am Good is a personal safety check-in application designed specifically for individuals living alone who want to provide peace of mind to their loved ones. The app serves as a quiet safety companion, enabling users to confirm their wellbeing through simple, accessible interactions while ensuring help is alerted if something goes wrong.',
+              'The application features a large, easy-to-use interface with one-tap safety confirmation buttons. Users can indicate their status through three health indicators - "I\'m okay," "I feel unwell," or "Need to talk" - making it easy to communicate wellbeing even when verbal communication is difficult. Emergency contacts can be managed through an intuitive system supporting up to 5 contacts with both email and phone information.',
+              'Flexible scheduling options allow users to set check-in frequencies that match their lifestyle - daily, twice-daily, weekly, or custom intervals. The system includes configurable grace periods ranging from 15 minutes to 2 hours before triggering alerts, preventing false alarms. Automated email notifications via Resend API ensure emergency contacts are promptly informed if check-ins are missed, while a chronological history tracks all check-ins grouped by date.',
+            ],
           }),
           makeProject('SquashPro', 'Squash match finder with court booking, opponent matching, Google OAuth, interactive maps, player ratings, and AI coaching tips.', {
             demoUrl: 'https://squashpro.vercel.app',
             githubUrl: 'https://github.com/alfredang/SquashPro',
             techStack: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS'],
+            images: {
+              hero: '/portfolio/squashpro/book-court-map.png',
+              gallery: [
+                '/portfolio/squashpro/find-match-cards.png',
+              ],
+            },
             features: [
               'Court booking with interactive map',
               'Match discovery for finding open matches',
@@ -968,6 +1300,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Live booking updates via Supabase',
               'React with TypeScript implementation',
               'Tailwind CSS styling',
+            ],
+            overview: [
+              'SquashPro revolutionizes the squash playing experience by bringing together court booking, match-finding, and AI coaching in one comprehensive platform. Designed for squash enthusiasts of all skill levels, the application simplifies the process of organizing games while helping players improve their skills through intelligent recommendations.',
+              'The platform features an interactive court booking system with map integration, allowing players to easily locate and reserve courts in their area. Players can discover potential matches based on skill level and availability, view opponent ratings and histories, and connect with the squash community through a built-in social system. Secure authentication is handled through Google OAuth, ensuring safe and convenient access.',
+              'Powered by Google Gemini AI, SquashPro provides personalized coaching recommendations based on player performance and preferences. Real-time synchronization via Supabase ensures that all bookings, match invitations, and player reviews are instantly updated across the platform. The modern React-based interface with Tailwind CSS styling delivers a smooth, responsive experience on all devices.',
             ],
           }),
         ],
@@ -985,6 +1322,12 @@ export const PORTFOLIO_CATEGORIES = [
             demoUrl: 'https://alfredang.github.io/pong-game/',
             githubUrl: 'https://github.com/alfredang/pong-game',
             techStack: ['Vite', 'Tailwind CSS', 'JavaScript', 'Web Audio API'],
+            images: {
+              hero: '/portfolio/futuristic-pong/gameplay-rally.png',
+              gallery: [
+                '/portfolio/futuristic-pong/ai-wins-neon.png',
+              ],
+            },
             features: [
               'Three difficulty levels (Easy, Normal, Hard)',
               'Neon glow visual effects',
@@ -1002,11 +1345,23 @@ export const PORTFOLIO_CATEGORIES = [
               'Vanilla JavaScript, Vite, Tailwind CSS v4',
               'Less than 50kb gzipped file size',
             ],
+            overview: [
+              'Futuristic Pong reimagines the iconic 1972 arcade game with modern web technologies and stunning visual design. Built with Vite and Tailwind CSS v4, this game combines nostalgic gameplay with cutting-edge aesthetics including neon glows, CRT scanlines, and glassmorphic UI elements that create a premium gaming experience worthy of modern displays.',
+              'The game features an intelligent AI opponent with three distinct difficulty levels that go far beyond simple speed adjustments. Each difficulty level changes the AI\'s reaction time, prediction accuracy, and pursuit behavior, creating genuinely different gameplay experiences. The ball dynamically scales speed based on difficulty, and every hit is accompanied by real-time synthesized sound effects created with the Web Audio API, eliminating the need for external audio files.',
+              'Perfect for both casual play and competitive challenges, Futuristic Pong delivers smooth 60fps performance through optimized Canvas rendering with physics updates decoupled from frame rendering. The responsive design works seamlessly on desktop with mouse and keyboard controls, as well as on mobile devices with intuitive touch controls. At less than 50kb gzipped with zero external assets, it\'s a testament to efficient modern web development.',
+            ],
           }),
           makeProject('Kid-Friendly Sudoku', 'Colorful 9x9 Sudoku game with three difficulty levels, countdown timer, and click-to-play number pad.', {
             demoUrl: 'https://alfredang.github.io/sudoku/',
             githubUrl: 'https://github.com/alfredang/sudoku',
             techStack: ['HTML', 'CSS', 'JavaScript'],
+            images: {
+              hero: '/portfolio/kid-friendly-sudoku/gameplay-grid-easy-mode.png',
+              gallery: [
+                '/portfolio/kid-friendly-sudoku/menu-difficulty-select.png',
+                '/portfolio/kid-friendly-sudoku/gameplay-puzzle-mobile.png',
+              ],
+            },
             features: [
               '3 difficulty levels (Easy, Medium, Hard)',
               'Countdown timer with color pulses',
@@ -1022,11 +1377,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Desktop, tablet, and mobile support',
               'Vanilla JavaScript implementation',
             ],
+            overview: [
+              'This is a browser-based puzzle game featuring a colorful, kid-friendly interface built with plain HTML, CSS, and JavaScript. No frameworks or dependencies required \u2014 players can simply open and play immediately in any modern web browser, making it accessible for casual gaming and educational purposes.',
+              'The game offers three difficulty levels with varying time limits: Easy mode provides 15 minutes, Medium mode allows 10 minutes, and Hard mode challenges players with just 5 minutes to complete the puzzle. A countdown timer pulses red below 30 seconds to create urgency, while click-to-play interface requires no keyboard input for maximum accessibility.',
+              'Built using backtracking algorithms to generate valid puzzles, the game features rule-based validation that highlights conflicts in red, win detection with celebration animations, and solution reveal functionality with color-coded answers. The mobile-responsive design ensures smooth gameplay across all devices, while every generated board is verified for solvability to guarantee fair gameplay.',
+            ],
           }),
           makeProject('Modern Frogger', 'Cute, modern remake of the classic Frogger game with smooth animations.', {
             demoUrl: 'https://alfredang.github.io/Frogger-game/',
             githubUrl: 'https://github.com/alfredang/Frogger-game',
             techStack: ['HTML', 'CSS', 'JavaScript'],
+            images: {
+              hero: '/portfolio/modern-frogger/gameplay-cartoon-hop.png',
+              gallery: [
+                '/portfolio/modern-frogger/gameplay-road-river.png',
+              ],
+            },
             features: [
               'Classic Frogger gameplay (dodge cars, hop on logs)',
               'Cute vector-style graphics with pastel colors',
@@ -1038,11 +1404,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Pause functionality (P key)',
               'Vanilla HTML, CSS, and JavaScript implementation',
             ],
+            overview: [
+              'Modern Frogger reimagines the beloved 1981 arcade classic with charming vector-style graphics and a delightful pastel color palette that creates a contemporary aesthetic while preserving the timeless gameplay. Built with vanilla HTML, CSS, and JavaScript, this browser-based game delivers the classic challenge of guiding a frog across busy roads and dangerous rivers to safety.',
+              'The game features authentic Frogger mechanics where players must time their movements carefully to dodge speeding cars on the road and hop across moving logs in the river. Each successful crossing earns points, while collisions or falling into the water cost lives, creating the perfect balance of challenge and reward. Audio feedback enhances the experience with sound effects for jumps, collisions, and victories that provide satisfying immediate feedback for player actions.',
+              'Perfect for both desktop and tablet play, Modern Frogger supports flexible control schemes with both Arrow Keys and WASD options, making it accessible for all users. The cute aesthetic and polished presentation make it appealing to players of all ages, while the progressive difficulty and score tracking system provide motivation to improve skills and achieve higher scores with each playthrough.',
+            ],
           }),
           makeProject('Modern Snake', 'Modern Snake game with smooth animations, particle effects, and polished visuals.', {
             demoUrl: 'https://alfredang.github.io/snake-game/',
             githubUrl: 'https://github.com/alfredang/snake-game',
             techStack: ['HTML5', 'CSS3', 'JavaScript'],
+            images: {
+              hero: '/portfolio/modern-snake/gameplay-snake-food.png',
+              gallery: [
+                '/portfolio/modern-snake/menu-ready-to-play.png',
+              ],
+            },
             features: [
               'Animated apple with pulsing effect',
               'Realistic apple shape rendering',
@@ -1056,11 +1433,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Vanilla JavaScript with HTML5 Canvas',
               'Dynamic visual feedback',
             ],
+            overview: [
+              'Modern Snake reimagines the classic arcade game with stunning visual effects and smooth animations that bring the gameplay to life. Built with HTML5 Canvas and vanilla JavaScript, this game delivers a premium gaming experience with 60fps performance and eye-catching graphics that captivate players from the first moment.',
+              'The snake features expressive design elements including animated eyes, a flickering tongue, and detailed scale patterns that create personality and charm. When the snake eats food, satisfying particle effects burst across the screen, providing immediate visual feedback. The animated apple pulses with life and features realistic shaping that makes every catch feel rewarding.',
+              'Perfect for quick gaming sessions or extended play, Modern Snake includes high score persistence using localStorage, so you can always challenge yourself to beat your personal best. The game works beautifully on all devices with support for both arrow keys and WASD controls, making it accessible whether you\'re at a desktop or using a laptop trackpad.',
+            ],
           }),
           makeProject('Neon Donkey Kong', 'Sleek, neon-inspired reimagining of the classic Donkey Kong arcade game.', {
             demoUrl: 'https://alfredang.github.io/donkey-kong-game/',
             githubUrl: 'https://github.com/alfredang/donkey-kong-game',
             techStack: ['HTML5 Canvas', 'JavaScript', 'Web Audio API'],
+            images: {
+              hero: '/portfolio/neon-donkey-kong/gameplay-barrels-platforms.png',
+              gallery: [
+                '/portfolio/neon-donkey-kong/menu-neon-kong.png',
+              ],
+            },
             features: [
               'Classic Donkey Kong gameplay mechanics',
               'Neon-inspired visual aesthetics',
@@ -1073,11 +1461,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Vanilla JavaScript implementation',
               'Browser-based gameplay',
             ],
+            overview: [
+              'Neon Donkey Kong reimagines the legendary 1981 arcade platformer with a modern synth-filled aesthetic that honors the golden age of arcades while embracing contemporary web development. Built entirely from the ground up using vanilla HTML5 Canvas and JavaScript, this game delivers authentic arcade gameplay mechanics including precise jumping physics, ladder climbing, and barrel dodging that defined the original classic.',
+              'The visual design features stunning neon arcade styling with vibrant colors, glowing effects, and glassmorphic UI elements that create a premium gaming experience. All sound effects are synthesized in real-time using the Web Audio API, producing authentic retro arcade audio without requiring external sound files. The responsive control system supports multiple input methods including WASD keys, arrow keys, and spacebar for jumping, with pause functionality for taking breaks during intense gameplay.',
+              'Perfect for retro gaming enthusiasts and new players alike, Neon Donkey Kong brings nostalgic arcade action to modern browsers with smooth animations and optimized performance. The game captures the essence of classic platforming challenges while presenting it with contemporary polish that makes it feel fresh and engaging for today\'s players.',
+            ],
           }),
           makeProject('Neon Pac-Man', 'Sleek, modern Neon Pac-Man arcade game with smart ghost AI, responsive design, and programmatic sound effects.', {
             demoUrl: 'https://alfredang.github.io/pacman-game/',
             githubUrl: 'https://github.com/alfredang/pacman-game',
             techStack: ['HTML', 'CSS', 'JavaScript'],
+            images: {
+              hero: '/portfolio/neon-pac-man/gameplay-maze-ghosts.png',
+              gallery: [
+                '/portfolio/neon-pac-man/menu-retro-title.png',
+              ],
+            },
             features: [
               'Classic Pac-Man maze navigation',
               'Smart ghost AI with different behaviors',
@@ -1092,11 +1491,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Vanilla JavaScript with HTML5 Canvas',
               'Retro arcade aesthetics with modern twist',
             ],
+            overview: [
+              'Neon Pac-Man brings the beloved 1980 maze-chase classic into the modern era with stunning dark mode design and glowing neon visual effects. Built with vanilla HTML, CSS, and JavaScript, this game demonstrates the power of fundamental web technologies to create engaging, professional gaming experiences without relying on heavy frameworks or external libraries.',
+              'The game features intelligent ghost AI with distinct personality behaviors that create dynamic and challenging gameplay. Ghosts alternate between chase and random movement patterns, and enter a vulnerable "scared" mode when Pac-Man collects power pellets, faithfully recreating the strategic depth of the original arcade classic. All sound effects are generated programmatically using the Web Audio API, eliminating the need for external audio files while maintaining authentic arcade-style audio feedback.',
+              'Perfect for both desktop and tablet play, Neon Pac-Man features responsive grid-based movement with smooth animations and transitions. Players can use either WASD or Arrow Keys for controls, making gameplay comfortable for all users. The modular codebase with organized file structure makes it an excellent reference for developers learning game development, while the sleek neon theme and polished UI ensure an enjoyable experience for players.',
+            ],
           }),
           makeProject('Neon Tetris', 'Modern, browser-based Tetris game with responsive design and neon arcade visuals.', {
             demoUrl: 'https://alfredang.github.io/tetris-game/',
             githubUrl: 'https://github.com/alfredang/tetris-game',
             techStack: ['HTML', 'CSS', 'JavaScript'],
+            images: {
+              hero: '/portfolio/neon-tetris/gameplay-colorful-blocks.png',
+              gallery: [
+                '/portfolio/neon-tetris/menu-neon-title.png',
+              ],
+            },
             features: [
               'Classic Tetris gameplay with seven tetrominoes',
               'Neon-inspired visual design',
@@ -1111,11 +1521,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Vanilla JavaScript implementation',
               'Modern UI with glowing effects',
             ],
+            overview: [
+              'Neon Tetris brings the classic block-stacking puzzle game into the modern era with a stunning dark theme and glowing neon effects. This browser-based game features all the traditional Tetris gameplay you love, enhanced with contemporary visual effects and smooth animations that create an immersive arcade experience.',
+              'The game includes intelligent features like ghost piece preview that shows where your current piece will land, helping you plan strategic moves. With a sophisticated wall kick rotation system, pieces intelligently adjust their position near walls for smoother gameplay. The scoring system rewards skilled play with increasing multipliers as you level up, and your high score persists between sessions.',
+              'Perfect for both casual players and Tetris masters, the game adapts to your skill level with progressive difficulty that increases speed as you advance through levels. Whether you\'re playing on desktop with keyboard controls or on mobile with intuitive touch controls, Neon Tetris delivers a polished, professional gaming experience that keeps you coming back for more.',
+            ],
           }),
           makeProject('Pastel Space Invaders', 'Whimsical, pastel-themed reimagining of Space Invaders with smooth animations.', {
             demoUrl: 'https://alfredang.github.io/space-invader-game/',
             githubUrl: 'https://github.com/alfredang/space-invader-game',
             techStack: ['HTML5', 'JavaScript'],
+            images: {
+              hero: '/portfolio/pastel-space-invaders/gameplay-ghost-invasion.png',
+              gallery: [
+                '/portfolio/pastel-space-invaders/menu-cute-edition.png',
+              ],
+            },
             features: [
               'Classic Space Invaders gameplay',
               'Pastel color scheme with soft aesthetics',
@@ -1131,11 +1552,22 @@ export const PORTFOLIO_CATEGORIES = [
               'HTML5 Canvas rendering',
               'Retro arcade feel with modern visuals',
             ],
+            overview: [
+              'This repository contains a pastel-themed reimagining of the classic Space Invaders arcade game. Players must defeat successive waves of adorable alien invaders before they reach the bottom of the screen, combining nostalgic arcade gameplay with a modern cute aesthetic design.',
+              'The game features synthesized audio effects via Web Audio API, particle explosion effects, and a mobile-friendly responsive interface. Players control their spacecraft using arrow keys or A/D keys for movement and the spacebar to attack, creating an accessible gaming experience across all devices.',
+              'Built entirely with vanilla web technologies, this project demonstrates the power of HTML5 Canvas for graphics rendering, CSS3 animations, and JavaScript ES6 Modules for clean game logic architecture. The wave-based enemy progression system ensures challenging gameplay that scales in difficulty as players advance through levels.',
+            ],
           }),
           makeProject('Pixel Art Dungeon Crawler', 'Top-down pixel art dungeon crawler with elemental spells and 4 dungeon rooms.', {
             demoUrl: 'https://alfredang.github.io/pixelartgame/',
             githubUrl: 'https://github.com/alfredang/pixelartgame',
             techStack: ['HTML5 Canvas', 'JavaScript'],
+            images: {
+              hero: '/portfolio/pixel-art-dungeon-crawler/gameplay-dungeon-spells.png',
+              gallery: [
+                '/portfolio/pixel-art-dungeon-crawler/menu-click-to-start.png',
+              ],
+            },
             features: [
               'Top-down dungeon exploration',
               'Pixel art graphics and animations',
@@ -1151,11 +1583,22 @@ export const PORTFOLIO_CATEGORIES = [
               'Retro pixel art aesthetic',
               'Vanilla JavaScript game engine',
             ],
+            overview: [
+              'A top-down pixel art action dungeon crawler built with HTML5 Canvas and vanilla JavaScript. Players control the Godot mascot through interconnected dungeon rooms, battling haunted weapons and collecting resources in a nostalgic retro gaming experience powered entirely by modern web standards.',
+              'The combat system features three elemental spell types with distinct characteristics: Fire spells deliver rapid attacks, Ice spells provide powerful strikes, and Lightning spells offer swift projectiles. Each spell features unique visual and audio feedback. Players face two adversary classes\u2014charging Haunted Swords that rush directly at players, and Haunted Shields that block frontal attacks and require tactical flanking maneuvers to defeat.',
+              'Navigate through four interconnected dungeon rooms with escalating challenge levels while collecting gems for scoring and hearts for health restoration. The game features particle effects including impact sparks and death explosions, comprehensive sound design covering shooting, combat impacts, pickups, and spell switching, plus spell acquisition pickups that unlock new magical abilities as players progress through the dungeon.',
+            ],
           }),
           makeProject('Retro Street Fighter', '2D fighter with original pixel-art assets, custom animation engine, and smooth local PvP gameplay.', {
             demoUrl: 'https://alfredang.github.io/street-fighter-game/',
             githubUrl: 'https://github.com/alfredang/street-fighter-game',
             techStack: ['HTML5 Canvas', 'JavaScript'],
+            images: {
+              hero: '/portfolio/retro-street-fighter/dojo-pixel-art.png',
+              gallery: [
+                '/portfolio/retro-street-fighter/menu-fighters-dojo.png',
+              ],
+            },
             features: [
               '2D fighting game mechanics',
               'Original pixel-art character sprites',
@@ -1171,11 +1614,20 @@ export const PORTFOLIO_CATEGORIES = [
               'HTML5 Canvas rendering',
               'Retro arcade fighting experience',
             ],
+            overview: [
+              'This is a retro arcade-style 2D fighting game built entirely with vanilla JavaScript and HTML5 Canvas. The project recreates classic 90s combat mechanics with modern web standards, featuring original pixel-art assets generated with AI and smooth local player-versus-player gameplay that brings nostalgic arcade action to the browser.',
+              'The game implements an arcade combat system with fast-paced 1v1 battles including jumping, attacking, and physics-based gravity. A custom animation engine handles multi-row sprite sheets with frame-dependent hitboxes and character flipping, while health bars powered by GSAP animations create a polished retro UI styled with Press Start 2P font aesthetic.',
+              'Players engage in round-based matches with timer-based gameplay, win/loss/tie detection, and restart functionality. The technical implementation uses Axis-Aligned Bounding Box collision detection for precision hit registration, with sprites mapping to 8x8 or 7x7 grid layouts that enable smooth state transitions between Idle, Run, Jump, and Attack animations.',
+            ],
           }),
           makeProject('Story Creator (AutoGen + Chainlit)', 'Multi-agent interactive story creator with human-in-the-loop review using AutoGen and Chainlit.', {
             demoUrl: 'https://web-production-fba33.up.railway.app/',
             githubUrl: 'https://github.com/alfredang/story-creator-autogen-chainlit',
             techStack: ['Python', 'AutoGen', 'Chainlit', 'Railway'],
+            images: {
+              hero: '/portfolio/story-creator-autogen-chainlit/story-creation-chat.png',
+              gallery: [],
+            },
             features: [
               'Multi-agent story generation system',
               'Human-in-the-loop review process',
@@ -1190,11 +1642,23 @@ export const PORTFOLIO_CATEGORIES = [
               'Python backend with async support',
               'Conversational story creation experience',
             ],
+            overview: [
+              'Story Creator is an innovative multi-agent storytelling platform that combines the power of Microsoft\'s AutoGen framework with Chainlit\'s interactive interface. The system employs three specialized agents—Plot Agent for narrative structure, Character Agent for protagonist development, and Ending Agent for climax resolution—working in coordinated sequence to generate compelling narratives.',
+              'The application follows a three-stage pipeline: multi-agent generation where specialized agents contribute their expertise, orchestration through RoundRobinGroupChat managing sequential execution, and human review cycles allowing users to approve or request revisions. This human-in-the-loop approach ensures stories meet quality expectations through iterative improvement.',
+              'Powered by OpenAI GPT-4.1-mini and built with Python 3.13+, the platform provides real-time streaming UI with step visualization and interactive action buttons. Deployed on Railway with support for Chainlit Cloud, Story Creator makes collaborative AI storytelling accessible through an intuitive, engaging interface.',
+            ],
           }),
           makeProject('Tic-Tac-Toe AI', 'Sleek Tic-Tac-Toe game with unbeatable Minimax AI opponent, dark-mode UI, and smooth animations.', {
             demoUrl: 'https://alfredang.github.io/tic-tac-toe-game/',
             githubUrl: 'https://github.com/alfredang/tic-tac-toe-game',
             techStack: ['HTML', 'CSS', 'JavaScript'],
+            images: {
+              hero: '/portfolio/tic-tac-toe-ai/gameplay-vs-cpu.png',
+              gallery: [
+                '/portfolio/tic-tac-toe-ai/board-empty-glow.png',
+                '/portfolio/tic-tac-toe-ai/cpu-wins-round.png',
+              ],
+            },
             features: [
               'Unbeatable Minimax AI algorithm',
               'Player vs AI mode',
@@ -1209,6 +1673,11 @@ export const PORTFOLIO_CATEGORIES = [
               'Hover effects and visual feedback',
               'Modern minimalist design',
               'Vanilla JavaScript implementation',
+            ],
+            overview: [
+              'This is a contemporary implementation of the classic Tic-Tac-Toe game using only vanilla web technologies. The project emphasizes clean code organization and modern design principles while maintaining full responsiveness across devices, making it accessible on desktops, tablets, and mobile phones.',
+              'The game offers both single-player mode against an AI opponent using the Minimax algorithm and local two-player support. Players enjoy visual feedback through turn indicators, animated win effects, and result modals, all enhanced with audio cues for moves, victories, draws, and resets that create an immersive gaming experience.',
+              'Built with semantic HTML5, CSS3 featuring custom properties and Grid layout, and vanilla JavaScript for state management, the project demonstrates clean separation of concerns across its architecture. Session statistics track wins across both players and draws, providing ongoing engagement and competitive gameplay.',
             ],
           }),
         ],
