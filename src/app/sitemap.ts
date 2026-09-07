@@ -7,6 +7,12 @@ import { MOBILE_APPS } from "@/lib/mobile-apps";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tertiaryinfotech.com";
 
+// The sitemap reads `pages` / `posts` at request time. Without this it is
+// baked at build time, so publishing a post or flipping `noIndex` leaves a
+// stale sitemap in the CDN until the next deploy — which is how 95 legacy
+// pages stayed submitted to Google after being marked noindex.
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Only submit pages/posts we actually want indexed. `noIndex` rows emit a
   // <meta name="robots" content="noindex"> — submitting them in the sitemap as
