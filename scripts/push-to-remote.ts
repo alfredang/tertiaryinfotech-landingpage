@@ -26,13 +26,30 @@ import {
   tags,
   postTags,
   users,
+  redirects,
 } from "../src/db/schema";
 
-type Resource = "menus" | "settings" | "taxonomy" | "pages" | "posts" | "users";
+type Resource =
+  | "menus"
+  | "settings"
+  | "taxonomy"
+  | "pages"
+  | "posts"
+  | "redirects"
+  | "users";
 // `users` is intentionally NOT in ALL — must be explicitly requested.
-const ALL: Resource[] = ["menus", "settings", "taxonomy", "pages", "posts"];
+const ALL: Resource[] = ["menus", "settings", "taxonomy", "pages", "posts", "redirects"];
 // taxonomy must run before posts (FK by slug); users runs first so pages/posts can resolve authors
-const ORDER: Resource[] = ["users", "taxonomy", "settings", "menus", "pages", "posts"];
+// redirects last: they may point at pages/posts that must exist first.
+const ORDER: Resource[] = [
+  "users",
+  "taxonomy",
+  "settings",
+  "menus",
+  "pages",
+  "posts",
+  "redirects",
+];
 
 // Site-isolation guard: this repo serves tertiaryinfotech.com ONLY. Refuse to
 // push to any other host (e.g. the .edu.sg ai-pei clone) so a mis-set
@@ -263,6 +280,31 @@ async function pushPosts() {
   }
 }
 
+// ---- redirects --------------------------------------------------------------
+
+async function pushRedirects() {
+  const rows = await db.select().from(redirects);
+  if (rows.length === 0) {
+    console.log("  [redirects] skipped (no rows)");
+    return;
+  }
+  const payload = rows
+    // Self-referential rows are no-ops (Next already 308s trailing slashes)
+    // and would loop if ever honoured. Don't ship them.
+    .filter((r) => r.fromPath !== r.toPath)
+    .map((r) => ({
+      fromPath: r.fromPath,
+      toPath: r.toPath,
+      statusCode: r.statusCode === 302 ? 302 : 301,
+    }));
+  const CHUNK = 400;
+  for (let i = 0; i < payload.length; i += CHUNK) {
+    const slice = payload.slice(i, i + CHUNK);
+    const res = await postJson("/api/admin/sync/redirects", { redirects: slice });
+    console.log(`  [redirects] ${i + slice.length}/${payload.length} — ${res}`);
+  }
+}
+
 // ---- users ------------------------------------------------------------------
 
 async function pushUsers() {
@@ -292,6 +334,7 @@ const HANDLERS: Record<Resource, () => Promise<void>> = {
   taxonomy: pushTaxonomy,
   pages: pushPages,
   posts: pushPosts,
+  redirects: pushRedirects,
 };
 
 async function main() {

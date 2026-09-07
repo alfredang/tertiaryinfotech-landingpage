@@ -60,3 +60,6 @@ wp-*.sql*
 .agents/
 skills-lock.json
 .claude/skills/find-skills
+
+# Google Search Console exports (working data, not source)
+*-Coverage-*.xlsx

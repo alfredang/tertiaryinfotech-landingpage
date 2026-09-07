@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import { db } from "@/db";
 import { posts, categories, tags, postTags, redirects } from "@/db/schema";
@@ -108,7 +108,9 @@ export default async function PostPage({
       .from(redirects)
       .where(eq(redirects.fromPath, `/blog/${slug}`))
       .limit(1);
-    if (redir) redirect(redir.toPath);
+    // 308 (permanent) so Google consolidates link equity onto the new URL.
+    // `redirect()` would emit a 307 and leave the legacy URL indexed.
+    if (redir) permanentRedirect(redir.toPath);
     notFound();
   }
 

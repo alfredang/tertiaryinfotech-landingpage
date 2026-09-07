@@ -65,7 +65,7 @@ Built for Tertiary Infotech Academy, the codebase is structured to be re-used as
 - **Dashboard cards** — clickable KPI tiles plus dedicated panels for 10 Most Popular Tags, 5 Latest Posts, and 5 Latest Leads
 - **Encrypted credentials vault** — AES-256-GCM at rest, eye-reveal for admins, one-click env → DB migration
 - **Portfolio / Bespoke-Apps pages** — split page-vs-blog categories, a dedicated Portfolio category, lead-gen project pages auto-populated from `alfredang/<repo>` GitHub repos, each carrying a live GitHub repo badge and a lead form
-- **Local ⇄ Remote DB sync** — push menus, settings, pages, posts, taxonomy from local to production via a bearer-token API (preserving `createdAt`); pull leads from production back to local (`scripts/pull-leads.ts`); idempotent prod-side schema migration runner at `POST /api/admin/sync/migrate`
+- **Local ⇄ Remote DB sync** — push menus, settings, pages, posts, taxonomy and redirects from local to production via a bearer-token API (preserving `createdAt`); pull leads from production back to local (`scripts/pull-leads.ts`); idempotent prod-side schema migration runner at `POST /api/admin/sync/migrate`
 
 ### AI built in — Nemo self-improving lead-gen chatbot + Admin AI Assist
 - **Nemo AI chatbot** — branded floating widget that answers questions about your services and routes warm leads to your contact form. It now lives in the `/admin` back office ([src/app/admin/layout.tsx](src/app/admin/layout.tsx)); the customer-facing site fronts the WhatsApp widget instead
@@ -229,6 +229,9 @@ scripts/
   seed-admin.ts               Admin user + default menus + settings
   seed-categories.ts          Default category taxonomy
   reset-header-menu.ts        Rewrite header menu items
+  push-to-remote.ts           Push local content to production
+  add-legacy-redirects.ts     301s for legacy WordPress URLs
+  mark-legacy-noindex.ts      Hide imported theme-demo pages from search
 ```
 
 ## Scripts

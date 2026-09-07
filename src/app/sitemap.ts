@@ -1,16 +1,28 @@
 import type { MetadataRoute } from "next";
 import { db } from "@/db";
 import { pages, posts } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { EDTOOLS } from "@/lib/edtools-data";
 import { MOBILE_APPS } from "@/lib/mobile-apps";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tertiaryinfotech.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Only submit pages/posts we actually want indexed. `noIndex` rows emit a
+  // <meta name="robots" content="noindex"> — submitting them in the sitemap as
+  // well sends Google a contradictory signal and burns crawl budget on the
+  // legacy WordPress theme-demo imports (see scripts/mark-legacy-noindex.ts).
   const [allPages, allPosts] = await Promise.all([
-    db.select().from(pages).where(eq(pages.status, "published")).catch(() => []),
-    db.select().from(posts).where(eq(posts.status, "published")).catch(() => []),
+    db
+      .select()
+      .from(pages)
+      .where(and(eq(pages.status, "published"), eq(pages.noIndex, false)))
+      .catch(() => []),
+    db
+      .select()
+      .from(posts)
+      .where(and(eq(posts.status, "published"), eq(posts.noIndex, false)))
+      .catch(() => []),
   ]);
   return [
     { url: `${BASE}/`, changeFrequency: "weekly", priority: 1 },

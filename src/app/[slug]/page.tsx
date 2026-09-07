@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { db } from "@/db";
 import { pages, redirects, categories } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
@@ -69,7 +69,9 @@ export default async function CmsPage({
     .from(redirects)
     .where(eq(redirects.fromPath, `/${slug}`))
     .limit(1);
-  if (redir) redirect(redir.toPath);
+  // 308 (permanent) so Google consolidates link equity onto the new URL.
+  // `redirect()` would emit a 307 and leave the legacy URL indexed.
+  if (redir) permanentRedirect(redir.toPath);
 
   const page = await getPage(slug);
   if (!page) notFound();
