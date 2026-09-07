@@ -9,8 +9,8 @@
  *   2. Renamed portfolio pages (/squashpro → /squashpro-2 etc.).
  *   3. Misc typos and dead WP surfaces (/home, /blogBlog, /sample-page).
  *
- * WP archive routes (/category/*, /tag/*, /author/*, /2025/04/15) are
- * deliberately NOT redirected — they have no equivalent and a soft-404 to /blog
+ * WP archive routes (/category/*, /tag/*, /author/*, /2025/04/15) and
+ * /blog/page/N are deliberately NOT redirected — they have no equivalent and a soft-404 to /blog
  * would be a worse signal than an honest 404. They're left to age out.
  *
  * Idempotent: upserts on from_path. Run:
@@ -63,9 +63,6 @@ const MANUAL: Array<[string, string]> = [
   ["/idea-galaxy", "/idea-galaxy-2"],
   ["/ai-hrms", "/ai-hr-management-system"],
   ["/notebooklm", "/notebooklm-mcp-bridge"],
-  // Paginated blog archive was never implemented at /blog/page/N.
-  ["/blog/page/2", "/blog"],
-  ["/blog/page/3", "/blog"],
 ];
 
 async function main() {
